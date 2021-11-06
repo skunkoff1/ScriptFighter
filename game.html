@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Script Fighter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="body" class="menuStyle">
+
+    <div id="menu" class="">
+        <img src="Images/titlescreensmall.png" id="logomenu">
+        <form>
+            <fieldset>
+                <legend>PLAYER 1</legend>
+                <label>Name : <input required="required" name="player1name" id="player1name" type="text"
+                        placeholder="Player1 name" autocomplete="off" /></label>
+                <label>Word to guess : <input required="required" name="player1word" id="player1word" type="password"
+                        autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" /></label>
+                <input type="checkbox" value="P1ready" id="p1checked" />
+                <label for="p1checked">Player 1 Ready</label>
+            </fieldset>
+            <fieldset>
+                <legend>PLAYER 2</legend>
+                <label>Name : <input required="required" name="player2name" id="player2name" type="text"
+                        placeholder="Player2 name" autocomplete="off" /></label>
+                <label>Word to guess : <input required="required" name="player2word" id="player2word" type="password"
+                        autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" /></label>
+                <input type="checkbox" value="P2ready" id="p2checked" />
+                <label for="p2checked">Player 2 Ready</label>
+            </fieldset>
+            <div id="startBtn">
+                <p id="errAPI1" class="errAPI">Mot joueur 1 non valide !</p>
+                <p id="errAPI2" class="errAPI">Mot joueur 2 non valide !</p>
+                <p id="errAPI3" class="errAPI">Les deux mots sont faux !</p>
+                <button type='button' id="gameLaunch" onclick="checkStart()">Start !</button>
+            </div>
+        </form>
+        <div id="rules">
+            <p>Regles du jeu</p>
+            <ul>
+                <li>chaque joueur choisit le mot que son adversaire devra deviner</li>
+                <li>chaque joueur dispose de 10 PV</li>
+                <li>vous perdez 1 PV pour chaque guess rate (lettre ou mot)</li>
+                <li>le premier joueur a deviner le mot de son adversaire (ou le dernier en vie) gagne</li>
+                <li>tous les accents seront retirés</li>
+            </ul>
+        </div>
+    </div>
+    <div id="container">
+        <section id="header">
+            <div id="avatarP1">
+                <img src="Images/portraitP1.png" alt="imageP1" id="imageP1">
+            </div>
+            <div id="statP1">
+                <div id="healthP1">
+                    <div id="backbar1"></div>
+                    <div id="bar1" class=""></div>
+                    <img src="Images/lifebar.png" alt="lifebar" id="slot1">
+                </div>
+                <div id="name">
+                    <p id="nameP1" class="lightname">Player 1</p>
+                </div>
+            </div>
+            <div id="versus">
+                <img src="Images/VS.png" alt="image versus" id="vs-img">
+            </div>
+            <div id="statP2">
+                <div id="healthP2">
+                    <img src="Images/lifebar.png" alt="lifebar" id="slot2">
+                    <div id="backbar2"></div>
+                    <div id="bar2" class=""></div>
+                </div>
+                <div id="name">
+                    <p id="nameP2" class="">Player 2</p>
+                </div>
+            </div>
+            <div id="avatarP2">
+                <img src="Images/portraitP2.png" alt="imageP2" id="imageP2">
+            </div>
+
+        </section>
+
+        <div id="playerTurn">
+            <div id="underscoreArrays" class="">
+                <p id="p1Word">p1Word</p>
+                <p id="p2Word">p2Word</p>
+            </div>
+            <form id="answerForm">
+                <input required="required" minlength="1" type="text" name="playerAnswer" id="playerAnswer" autofocus="on"
+                    autocomplete="off" />
+                <button type='button' id="answerSubmit" onclick="play()">GUESS</button>
+            </form>
+        </div>
+
+        <div id="animation-container" class="">
+            <div id="turnPlayer">
+                <p id="pTurnName">PLayer 1 </p>
+                <p id="turnMsg">It's your turn now !</p>
+            </div>
+        </div>
+
+        <div id="message" class="">
+            <div id="good">
+                <p>Good Catch !</p>
+            </div>
+            <div id="absentLetter">
+                <p>Wrong !</p>
+            </div>
+            <div id="callLetter">
+                <p>T'as pas de memoire ou bien ?!</p>
+            </div>
+        </div>
+    </div>
+    <div id="endingScreen">
+        <h2 id="endingTitle">VICTOIRE !</h2>
+        <p id="endingText">Le joueur PlayerName remporte la partie avec le mot PlayerWord !</p>
+        <button type='input' id="replay" onclick="restart()"> Rejouer</button>
+    </div>
+    <div id="fightmsg" class="">
+        <img src="Images/fight.png" id="fightimg" class="">
+    </div>
+    <div id="baston">
+        <div id="perso1div">
+            <img src="Images/Spriteperso1.gif" id="perso1" class="animDamage">
+            <img src="Images/aura.gif" id="aura1">
+        </div>
+        <div id="roundP1"></div>
+        <div id="roundP2"></div>
+        <div id="perso2div">
+            <img src="Images/Spriteperso2.gif" id="perso2" class="">
+            <img src="Images/aura.gif" id="aura2">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

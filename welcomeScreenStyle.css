@@ -1,0 +1,44 @@
+@font-face { 	font-family: "Fighter"; 	src: url('Font/Fighter.ttf'); }
+
+#html, body {
+    height:100vh;
+    padding : 0;
+    margin : 0;
+    box-sizing:border-box;
+    font-family:Fighter;
+    background-image: url('Images/titlescreenNEW1pfi.png');
+    background-size: cover;
+}
+
+#accueilContainer {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+#fullscreen p {
+    text-align:center;
+    font-size: 30px;
+    padding:0;
+    margin: 10% 0 0 0;
+    color:white;
+}
+
+#startimg{
+    width:300px;
+}
+
+#pressBtn {
+    display:flex;
+    margin-top:40%;
+    align-self:center;
+}
+
+#credits {
+    font-family:'Courier New', Courier, monospace;
+    position : absolute;
+    margin-left : 10px;
+    bottom : 10px;
+    color:white;
+}
