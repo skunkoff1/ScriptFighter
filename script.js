@@ -41,6 +41,7 @@ let attack = 0;
 let music;
 let menuMusic = new Audio('Son/Titlescreen_Music.mp3');
 let menuLaunched = false;
+let musicAllowed = true;
 
 /*====================== VARIABLES AFFICHAGE MESSAGE JEU ======================*/
 
@@ -49,6 +50,7 @@ let p1checked = document.getElementById('p1checked');
 let p2checked = document.getElementById('p2checked');
 let placeHolderName1 = document.getElementById('player1name');
 let placeHolderName2 = document.getElementById('player2name');
+let musicButton = document.getElementById('musicButton');
 
 // gestion message changement de tour
 let turnMsg = document.getElementById('turnMsg');
@@ -126,21 +128,38 @@ let koimg = document.getElementById('ko-img');
 /*=============================== FONCTIONS ====================================*/
 /*==============================================================================*/
 
+// Fonction du bouton music ON / OFF
+function musicAllow() {
+    if (musicAllowed) {
+        menuMusic.pause();
+        musicAllowed = false;
+        menuLaunched = false;
+        musicButton.src = "Images/musicOFF.png"
+    }
+    else {
+        musicAllowed = true;
+        musicButton.src = "Images/musicON.png";
+        pressStart();
+    }
+}
+
 // Fonction de lancement de la musique menu
 function pressStart() {
-    if (menuLaunched == false) {
-        menuMusic.volume = 0.1;
-        if (typeof menuMusic.loop == 'boolean') {
-            menuMusic.loop = true;
+    if (musicAllowed) {
+        if (menuLaunched == false) {
+            menuMusic.volume = 0.1;
+            if (typeof menuMusic.loop == 'boolean') {
+                menuMusic.loop = true;
+            }
+            else {
+                menuMusic.addEventListener('ended', function () {
+                    this.currentTime = 0;
+                    this.play();
+                }, false);
+            }
+            menuMusic.play();
+            menuLaunched = true;
         }
-        else {
-            menuMusic.addEventListener('ended', function () {
-                this.currentTime = 0;
-                this.play();
-            }, false);
-        }
-        menuMusic.play();
-        menuLaunched = true;
     }
 }
 
@@ -303,16 +322,18 @@ function launchGame() {
     menuMusic.pause();
     menuMusic.currentTime = 0;
     music.volume = 0.1;
-    if (typeof music.loop == 'boolean') {
-        music.loop = true;
+    if (musicAllowed) {
+        if (typeof music.loop == 'boolean') {
+            music.loop = true;
+        }
+        else {
+            music.addEventListener('ended', function () {
+                this.currentTime = 0;
+                this.play();
+            }, false);
+        }
+        music.play();
     }
-    else {
-        music.addEventListener('ended', function () {
-            this.currentTime = 0;
-            this.play();
-        }, false);
-    }
-    music.play();
 }
 
 // fonction pour afficher le stage et sa musique en fonction de l'heure

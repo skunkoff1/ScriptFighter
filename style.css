@@ -19,6 +19,22 @@ body {
     display:block;       
 }
 
+#musicButtonDiv {
+    position:absolute;
+    display:flex;
+    justify-content: center;
+    right:5%;
+    top:25%;    
+    width:250px;
+    border: 1px solid white;
+    background-color: black;    
+}
+
+#musicButton {
+    width:200px;
+    padding: 10px 0 10px 0;
+}
+
 #logomenu {
     position: relative;
     margin-top:2%;
@@ -143,7 +159,7 @@ button {
     font-size:35px;
 }
 
-button:hover {
+#gameLaunch:hover, #answerSubmit:hover {
     background-color:rgba(160, 132, 132, 0.295);
     color:aliceblue;
 }
