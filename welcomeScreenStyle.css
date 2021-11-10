@@ -26,19 +26,12 @@
 }
 
 #startimg{
-    width:300px;
+    width:440px;
 }
 
 #pressBtn {
     display:flex;
-    margin-top:40%;
+    margin-top:36.2%;
     align-self:center;
 }
 
-#credits {
-    font-family:'Courier New', Courier, monospace;
-    position : absolute;
-    margin-left : 10px;
-    bottom : 10px;
-    color:white;
-}

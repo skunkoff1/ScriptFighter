@@ -9,7 +9,7 @@
 
 <body id="body" class="menuStyle">
 
-    <div id="menu" class="">
+    <div id="menu" class="" onclick="pressStart()">
         <img src="Images/titlescreensmall.png" id="logomenu">
         <form>
             <fieldset>
@@ -65,6 +65,7 @@
             </div>
             <div id="versus">
                 <img src="Images/VS.png" alt="image versus" id="vs-img">
+                <img src="Images/VS_KO.gif" alt="image versus" id="ko-img">
             </div>
             <div id="statP2">
                 <div id="healthP2">
@@ -87,11 +88,11 @@
                 <p id="p1Word">p1Word</p>
                 <p id="p2Word">p2Word</p>
             </div>
-            <form id="answerForm">
-                <input required="required" minlength="1" type="text" name="playerAnswer" id="playerAnswer" autofocus="on"
-                    autocomplete="off" />
+            <div id="answerForm">
+                <input required="required" minlength="1" type="text" name="playerAnswer" id="playerAnswer" class=""
+                    autofocus="on" autocomplete="off" />
                 <button type='button' id="answerSubmit" onclick="play()">GUESS</button>
-            </form>
+            </div>
         </div>
 
         <div id="animation-container" class="">
@@ -124,7 +125,7 @@
     <div id="baston">
         <div id="perso1div">
             <img src="Images/Spriteperso1.gif" id="perso1" class="animDamage">
-            <img src="Images/aura.gif" id="aura1">
+            <img src="Images/New_effect.gif" id="aura1">
         </div>
         <div id="roundP1"></div>
         <div id="roundP2"></div>
@@ -132,6 +133,15 @@
             <img src="Images/Spriteperso2.gif" id="perso2" class="">
             <img src="Images/aura.gif" id="aura2">
         </div>
+    </div>
+    <div id="finishDiv">
+        <p id="finishText">FINISH HIM !!</p>
+    </div>
+    <div id="altback">
+
+    </div>
+    <div id="koscreen">
+        <img src="Images/koimg.png">
     </div>
 
     <script src="script.js"></script>
