@@ -8,12 +8,12 @@ This game can be play online (recommended) or locally.
 
 1. HOW TO PLAY WITHOUT AN INTERNET CONNECTION (ADVANCED INFORMATIC OR RECKLESS USER !)
 
-This game use an API online which chek intop a 411000 words in French and ****** words in English on lists, 
+This game use an API online which chek intop a 411000 words in French and shortly ****** words in English on lists, 
 it's easier to play online.
 But you can play locally by following these instructions :
 
 - You have to install the latest LTS (Long Time Supported) version of nodeJS here -> https://nodejs.org/en/
-- Open Powershell or the command line tool of windows and go to the game directory on your device
+- Open Powershell or the command line tool and go to the game directory on your device
 - Execute this command to install a local server : npm init -y 
 - Execute these following commands : npm install express, npm install cors, npm install nodemon, npm install  fs
 - Open the file "script.js" and replace line 170 and 171 by the following code :
