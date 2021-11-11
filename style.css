@@ -159,7 +159,7 @@ button {
     font-size:35px;
 }
 
-#gameLaunch:hover, #answerSubmit:hover {
+#gameLaunch:hover, #answerSubmit:hover, #replay:hover {
     background-color:rgba(160, 132, 132, 0.295);
     color:aliceblue;
 }
