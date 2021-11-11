@@ -10,8 +10,7 @@ html, body {
 body {    
     background-size:cover;
     overflow:hidden;
-    z-index: 3;    
-    user-select: none; 
+    z-index: 3;
 }
 
 /*=================  MENU LANCEMENT JEU ===================== */
