@@ -3,6 +3,17 @@ Script Fighter : The Word Warrior
 Version Ultimate Final 1.0 november, 15th, 2021
 Credits : Original graphism and music  by : Sandy WEBERT
 	  Animations and code by : Philippe HEARD and Damien DIDRICH (aka Skunkoff)
+	  
+
+
+                    .__        __      _____.__       .__     __                
+  ______ ___________|__|______/  |_  _/ ____\__| ____ |  |___/  |_  ___________ 
+ /  ___// ___\_  __ \  \____ \   __\ \   __\|  |/ ___\|  |  \   __\/ __ \_  __ \
+ \___ \\  \___|  | \/  |  |_> >  |    |  |  |  / /_/  >   Y  \  | \  ___/|  | \/
+/____  >\___  >__|  |__|   __/|__|    |__|  |__\___  /|___|  /__|  \___  >__|   
+     \/     \/         |__|                   /_____/      \/          \/       
+
+Webpage will be deploy soon	  
 
 This game can be play online (recommended) or locally.
 
