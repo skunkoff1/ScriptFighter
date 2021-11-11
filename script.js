@@ -169,8 +169,8 @@ function pressStart() {
 
 // Vérification du mot dans l'API
 async function validateAPI(word) {
-    const res = await fetch("http://cemotexistetil.lyliya.fr:8888/exist?word=" + word); //Notre api=> http://localhost:3000/exist?word=   http://cemotexistetil.lyliya.fr:8888/exist?word=
-    // const res = await fetch("http://localhost:3000/exist?word=" + word); 
+    //const res = await fetch("http://cemotexistetil.lyliya.fr:8888/exist?word=" + word); //Notre api=> http://localhost:3000/exist?word=   http://cemotexistetil.lyliya.fr:8888/exist?word=
+     const res = await fetch("http://localhost:3000/exist?word=" + word); 
     const forms = await res.json();
     return forms.exist;
 }
@@ -1051,6 +1051,7 @@ function animSSJP1() {
 
     setTimeout(() => {
         perso1.src = "Images/Spriteperso1.gif";
+        AuraP1sup.style.display = "none";
     }, 2100);
 }
 
@@ -1114,6 +1115,7 @@ function animSSJP2() {
 
     setTimeout(() => {
         perso2.src = "Images/Spriteperso2.gif";
+        AuraP1sup.style.display = "none";
     }, 2100);
 }
 
