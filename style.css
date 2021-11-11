@@ -16,7 +16,7 @@ body {
 /*=================  MENU LANCEMENT JEU ===================== */
 
 #menu {
-    display:block;       
+    display:none;       
 }
 
 #musicButtonDiv {
@@ -135,7 +135,7 @@ fieldset {
     
     height: 100vh;
     width: 100vw;    
-    display:none;
+    display:block;
 }
 
 .gameStyle {
@@ -311,7 +311,7 @@ button {
     width:100vw;
     bottom:2%;
     height: 20%;
-    display:none;              
+    display:flex;              
 }
 
 #perso1div, #perso2div {
@@ -344,13 +344,33 @@ button {
     z-index:7;
 }
 
+#aura1sup {
+    width:220px;
+    position:absolute;
+    left: 9%;
+    bottom: 9%;
+    display:none;
+    opacity:1;
+    z-index:7;
+}
+
 #aura2 {
-    width:250px;
+    width:270px;
     position:absolute;
     right: 8%;
-    bottom: 19%;
+    bottom: 28%;
     display:none;
     z-index:5;
+}
+
+#aura2sup {
+    width:220px;
+    position:absolute;
+    right: 9%;
+    bottom: 9%;
+    display:none;
+    opacity:1;
+    z-index:7;
 }
 
 #roundP1 {
@@ -604,6 +624,26 @@ button {
     80% { transform: translate(-1px, -1px) rotate(1deg); }
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.finalShake {
+    animation-name: finalShake;
+    animation-duration: .5s;
+    animation-iteration-count: 4;
+}
+
+@keyframes finalShake{
+    0% { transform: translate(10px) }
+    10% { transform: translate(-10px)  }
+    20% { transform: translate(10px) }
+    30% { transform: translate(-10px) }
+    40% { transform: translate(10px) }
+    50% { transform: translate(10px)  }
+    60% { transform: translate(-10px) }
+    70% { transform: translate(10px)  }
+    80% { transform: translate(-10px) }
+    90% { transform: translate(10px) }
+    100% { transform: translate(-10px)  }
 }
 
 .errorEntry {
