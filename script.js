@@ -1361,6 +1361,7 @@ function laserfinishP1() {
             koOpacity -= 0.05;
         }, time);
     }
+
     setTimeout(() => {
         container.style.display = "none";
     }, 4000)
@@ -1511,6 +1512,10 @@ function laserfinishP2() {
             koOpacity -= 0.05;
         }, time);
     }
+
+    setTimeout(() => {
+        container.style.display = "none";
+    }, 4000);
 
     // ANIMATION LASER ET WHITESCREEN
     perso2.src = "Images/Attackperso2_0.png";

@@ -1061,7 +1061,7 @@ button {
 #finishDiv {
     position: absolute;
     top:33%;
-    left:18%;
+    width:100vw;
     font-size: 120px;
     letter-spacing: 0.2em;
     color:red;
@@ -1070,6 +1070,7 @@ button {
     animation-duration: 0.12s;
     animation-iteration-count: 7;
     display:none;
+    text-align: center;
 }
 
 #altback {
