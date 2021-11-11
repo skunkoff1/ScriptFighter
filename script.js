@@ -170,7 +170,7 @@ function pressStart() {
 // Vérification du mot dans l'API
 async function validateAPI(word) {
     const res = await fetch("http://cemotexistetil.lyliya.fr:8888/exist?word=" + word); //Notre api=> http://localhost:3000/exist?word=   http://cemotexistetil.lyliya.fr:8888/exist?word=
-    //const res = await fetch("http://localhost:3000/exist?word=" + word); 
+    // const res = await fetch("http://localhost:3000/exist?word=" + word); 
     const forms = await res.json();
     return forms.exist;
 }
@@ -823,7 +823,6 @@ function victory(player) {
     }
     endingTitle.innerHTML = "Victoire de " + winnerName + " !";
     endingText.innerHTML = endingString;
-    container.style.display = "none";
     endingScreen.style.display = "flex";
 }
 
@@ -995,7 +994,7 @@ function celebration(perso) {
 function animSSJP1() {
     perso1.src = "Images/Attackperso1_0.png";
     let bottomPerso = 35;
-    let bottomAura = 9;
+    let bottomAura = 15;
     let bottomAuraSup = 9;
     let opacityAuraSup = 1;
     let widthAura = 220;
@@ -1362,6 +1361,9 @@ function laserfinishP1() {
             koOpacity -= 0.05;
         }, time);
     }
+    setTimeout(() => {
+        container.style.display = "none";
+    }, 4000)
 
     // ANIMATION LASER ET WHITESCREEN
     perso1.src = "Images/Attackperso1_0.png";

@@ -10,7 +10,7 @@ html, body {
 body {    
     background-size:cover;
     overflow:hidden;
-    z-index: 3;
+    z-index: 3;         
 }
 
 /*=================  MENU LANCEMENT JEU ===================== */
@@ -339,7 +339,7 @@ button {
     width:220px;
     position:absolute;
     left: 9%;
-    bottom: 9%;
+    bottom: 15%;
     display:none;
     z-index:7;
 }
