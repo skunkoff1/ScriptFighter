@@ -17,7 +17,7 @@ body {
 /*=================  MENU LANCEMENT JEU ===================== */
 
 #menu {
-    display:none;       
+    display:block;       
 }
 
 #musicButtonDiv {
@@ -136,7 +136,7 @@ fieldset {
     
     height: 100vh;
     width: 100vw;    
-    display:block;
+    display:none;
 }
 
 .gameStyle {
@@ -312,7 +312,7 @@ button {
     width:100vw;
     bottom:2%;
     height: 20%;
-    display:flex;              
+    display:none;              
 }
 
 #perso1div, #perso2div {
