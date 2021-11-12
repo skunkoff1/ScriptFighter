@@ -318,7 +318,7 @@ function checkHours() {
     let slotNameP2 = document.getElementById('nameP2');
 
     date = new Date();
-    /*
+    
     // Fonction changeant de stage toutes les minutes
     minute = date.getMinutes();
     if (minute % 2 == 0) {
@@ -335,8 +335,8 @@ function checkHours() {
         name.style.color = "rgb(96, 173, 148)";
         slotNameP1.className = "lightname2";
         blink.style.color = "rgb(157, 248, 255)";   
-    }*/
-
+    }
+    /*
     // Fonction changeant de stage en fonction de l'heure de la journée
     
     hour = date.getHours();
@@ -354,7 +354,7 @@ function checkHours() {
         name.style.color = "rgb(96, 173, 148)";
         slotNameP1.className = "lightname2";
         blink.style.color = "rgb(157, 248, 255)";
-    }
+    }*/
 }
 
 /*====================== FONCTION APPELE LORS DU GUESS JOUEUR ==========================*/
