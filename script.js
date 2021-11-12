@@ -27,13 +27,9 @@ let fireP2 = 0;
 let turn = 1;
 
 // Gestion guess
-let answer;
 let verify;
-let mess;
 
 // Gestion cours du jeu
-let endingString;
-let winnerName;
 let inGame = false;
 let attack = 0;
 
@@ -46,23 +42,10 @@ let musicAllowed = true;
 /*====================== VARIABLES AFFICHAGE MESSAGE JEU ======================*/
 
 // Input menu début de jeu
-let p1checked = document.getElementById('p1checked');
-let p2checked = document.getElementById('p2checked');
-let placeHolderName1 = document.getElementById('player1name');
-let placeHolderName2 = document.getElementById('player2name');
 let musicButton = document.getElementById('musicButton');
 
 // gestion message changement de tour
 let turnMsg = document.getElementById('turnMsg');
-let pTurnName = document.getElementById('pTurnName');
-
-// affichage nom joueur
-let slotNameP1 = document.getElementById('nameP1');
-let slotNameP2 = document.getElementById('nameP2');
-
-// stockage mot joueur
-let wordP1 = document.getElementById('player1word');
-let wordP2 = document.getElementById('player2word');
 
 // affichage mot joueur
 let blink = document.getElementById('underscoreArrays');
@@ -75,56 +58,22 @@ let good = document.getElementById('good');
 let absentLetter = document.getElementById('absentLetter');
 let callLetter = document.getElementById('callLetter');
 
-// Barres de vie joueur
-let healthP1 = document.getElementById('bar1');
-let slotP1 = document.getElementById('slot1');
-let healthP2 = document.getElementById('bar2');
-let slotP2 = document.getElementById('slot2');
-
 // guess box
 let answerbox = document.getElementById('answerForm');
-let guessButton = document.getElementById('answerSubmit');
 let playerAnswer = document.getElementById('playerAnswer');
-
-/*========================= VARIABLES CONTENEUR JEU ==========================*/
-
-let container = document.getElementById('container');
-let menu = document.getElementById('menu');
-let body = document.getElementById('body');
-let sceneBaston = document.getElementById('baston');
-
-/*==================== VARIABLES AFFICHAGE ENDING SCREEN  =====================*/
-
-let endingScreen = document.getElementById('endingScreen');
-let endingTitle = document.getElementById('endingTitle');
-let endingText = document.getElementById('endingText');
 
 /*========================== VARIABLES ANIMATIONS =============================*/
 
 let perso1 = document.getElementById('perso1');
 let perso2 = document.getElementById('perso2');
 let auraP1 = document.getElementById('aura1');
-let auraP1sup = document.getElementById('aura1sup');
 let auraP2 = document.getElementById('aura2');
-let auraP2sup = document.getElementById('aura2sup');
-let roundP1 = document.getElementById('roundP1');
-let roundP2 = document.getElementById('roundP2');
-let auraball1 = document.getElementById('auraball1');
-let auraball2 = document.getElementById('auraball2');
+let laserP1 = document.getElementById('laserP1');
+let laserP2 = document.getElementById('laserP2');
 
 // animation changement de tour
 let anim = document.getElementById('animation-container');
 let animPlayer = document.getElementById('turnPlayer');
-
-// animation start fight
-let fightdiv = document.getElementById('fightmsg');
-let fightimg = document.getElementById('fightimg');
-
-// Animation ending screen
-let whiteScreen = document.getElementById('altback');
-let koscreen = document.getElementById('koscreen');
-let vsimg = document.getElementById('vs-img');
-let koimg = document.getElementById('ko-img');
 
 /*==============================================================================*/
 /*=============================== FONCTIONS ====================================*/
@@ -178,9 +127,16 @@ async function validateAPI(word) {
 async function checkStart() {
 
     // Variables 
+    // stockage mot joueur
+    let wordP1 = document.getElementById('player1word');
+    let wordP2 = document.getElementById('player2word');
+    // gestion messages erreurs
     let err1 = document.getElementById('errAPI1');
     let err2 = document.getElementById('errAPI2');
     let err3 = document.getElementById('errAPI3');
+    //checkbox
+    let p1checked = document.getElementById('p1checked');
+    let p2checked = document.getElementById('p2checked');
 
     // Reset des messages d'erreur de vérification des mots joueurs   
     err1.style.display = "none";
@@ -286,8 +242,12 @@ function createUnderscore(arrayP1, arrayP2) {
 function launchGame() {
 
     // Affichage du conteneur de jeu, on cache le menu
+    let menu = document.getElementById('menu');
+    let body = document.getElementById('body');
+    let sceneBaston = document.getElementById('baston');
     body.className = "gameStyle";
     menu.style.display = "none";
+    let container = document.getElementById('container');
     container.style.display = "block";
     sceneBaston.style.display = "flex";
 
@@ -295,10 +255,14 @@ function launchGame() {
     nameP1 = document.getElementById('player1name').value;
 
     // Appel de l'animation de remplissage des barres de vies
+    let healthP1 = document.getElementById('bar1');
+    let healthP2 = document.getElementById('bar2');
     healthP1.className = "fillHealth";
     healthP2.className = "fillHealth";
 
     // Appel de l'animation de start fight
+    let fightdiv = document.getElementById('fightmsg');
+    let fightimg = document.getElementById('fightimg');
     fightdiv.className = "animfightdiv";
     fightimg.style.display = "block";
     fightimg.className = "animfightimg";
@@ -309,6 +273,8 @@ function launchGame() {
 
     createUnderscore(arrayP1, arrayP2);
     displayWord(1);
+    let slotNameP1 = document.getElementById('nameP1');
+    let slotNameP2 = document.getElementById('nameP2');
 
     slotNameP1.innerHTML = nameP1;
     slotNameP2.innerHTML = nameP2;
@@ -341,9 +307,14 @@ function launchGame() {
 
 // fonction pour afficher le stage et sa musique en fonction de l'heure
 function checkHours() {
+
+    let body = document.getElementById('body');
+
     date = new Date();
-    hour = date.getHours();
-    if ((hour >= 10) && (hour <= 18)) {
+
+    // Fonction changeant de stage toutes les minutes
+    minute = date.getMinutes();
+    if (minute % 2 == 0) {
         music = new Audio('Son/script_Fighter.mp3');
         body.style.backgroundImage = "url('Images/backgroundSandy.png')";
     }
@@ -351,12 +322,26 @@ function checkHours() {
         music = new Audio('Son/Stage_2.mp3');
         body.style.backgroundImage = "url('Images/STAGE2.gif')";
     }
+
+    // Fonction changeant de stage en fonction de l'heure de la journée
+    /*
+    hour = date.getHours();
+    if ((hour >= 9) && (hour <= 18)) {
+        music = new Audio('Son/script_Fighter.mp3');
+        body.style.backgroundImage = "url('Images/backgroundSandy.png')";
+    }
+    else {
+        music = new Audio('Son/Stage_2.mp3');
+        body.style.backgroundImage = "url('Images/STAGE2.gif')";
+    }*/
 }
 
 /*====================== FONCTION APPELE LORS DU GUESS JOUEUR ==========================*/
 
 // Fonction qui relie l'input au click du bouton
 playerAnswer.addEventListener("keyup", function (event) {
+
+    let guessButton = document.getElementById('answerSubmit');
     // 13 est le code de la touche entrée
     if (event.key === 'Enter') {
         // Cancel l'action par défaut si besoin
@@ -374,6 +359,8 @@ function play() {
     getWrongMessage();
 
     // Reset des animations et des variables utiles au check
+    let fightdiv = document.getElementById('fightmsg');
+    let fightimg = document.getElementById('fightimg');
     anim.className = "";
     fightdiv.className = "";
     fightimg.style.display = "none";
@@ -381,7 +368,7 @@ function play() {
     check = false;
 
     // Récupération du guess joueur et mise en majuscule    
-    answer = replace(playerAnswer.value);
+    let answer = replace(playerAnswer.value);
 
     // Vérification longueur guess et appel fonction en conséquence
     if (answer.length == 0) {
@@ -401,6 +388,9 @@ function play() {
 }
 
 function launchNextTurn() {
+
+    let guessButton = document.getElementById('answerSubmit');
+
     if (inGame && attack == 1) {
         guessButton.disabled = true;
         setTimeout(nextTurn, 3200);
@@ -419,8 +409,8 @@ function launchNextTurn() {
 /*=================== FONCTION VERIFICATION GUESS JOUEUR ==================*/
 
 function checkLetter(letter, player) {
-
-    // GESTION JOUEUR 2
+    let mess;
+    // GESTION JOUEUR 1
     if (player == 1) {
         // Si la lettre n'a pas encore été tentée
         if (triesP1.indexOf(letter) === -1) {
@@ -547,6 +537,7 @@ function checkLetter(letter, player) {
 
 //check de l'équivalence mot lorsque le joueur entre plus d'une lettre
 function checkWord(word, player) {
+    let container = document.getElementById('container');
     if (player == 1) {
         if (word == wordP2Upper) {
             p2w.innerHTML = wordP2Upper;
@@ -612,6 +603,7 @@ function displayWord(player) {
 /*============================== FONCTION GESTION DEGATS ===============================*/
 function displayDamage(player) {
     if (player == 2) {
+        let healthP2 = document.getElementById('bar2');
         if (attack == 1) {
             blinkDashAttack(perso1);
             setTimeout(() => {
@@ -632,6 +624,7 @@ function displayDamage(player) {
         }
     }
     else if (player == 1) {
+        let healthP1 = document.getElementById('bar1');
         if (attack == 1) {
             blinkDashAttack(perso2);
             setTimeout(() => {
@@ -648,12 +641,11 @@ function displayDamage(player) {
             setTimeout(() => {
                 finishHim(2);
             }, 2500)
-            healthP2.style.width = p2Hp * 2.9 + "%";
+            healthP1.style.width = p2Hp * 2.9 + "%";
         }
     }
 
 }
-
 
 //calcul des dégats joueur et check si ils tombent a zéro
 function playerDamage(player) {
@@ -694,6 +686,9 @@ function checkHealth() {
 
 //préparation du tour du joueur suivant
 function nextTurn() {
+    let pTurnName = document.getElementById('pTurnName');
+    let guessButton = document.getElementById('answerSubmit');
+
     if (player == 1) {
 
         // Gestion de la position de la guess box
@@ -713,6 +708,9 @@ function nextTurn() {
 
 
         // Permutation nom joueur
+        let slotNameP1 = document.getElementById('nameP1');
+        let slotNameP2 = document.getElementById('nameP2');
+
         slotNameP1.className = "";
         slotNameP2.className = "lightname";
         pTurnName.innerHTML = nameP2;
@@ -735,6 +733,9 @@ function nextTurn() {
         }
 
         // Permutation nom joueur
+        let slotNameP1 = document.getElementById('nameP1');
+        let slotNameP2 = document.getElementById('nameP2');
+
         slotNameP1.className = "lightname";
         slotNameP2.className = "";
         pTurnName.innerHTML = nameP1;
@@ -802,6 +803,13 @@ function finishHim(player) {
 
 //fonction de passage de l'écran jeu à l'écran de fin
 function victory(player) {
+    let endingString;
+    let winnerName;
+
+    let endingTitle = document.getElementById('endingTitle');
+    let endingText = document.getElementById('endingText');
+    let endingScreen = document.getElementById('endingScreen');
+
     inGame = false;
     if (player == 1) {
         if (p2Hp > 0) {
@@ -830,8 +838,11 @@ function victory(player) {
 //bouton restart qui réinitialise les variables de jeu mais conserve les joueurs
 function restart() {
 
-    // Affcihage du menu
+    // Affchaage du menu
+    let body = document.getElementById('body');
     body.style.backgroundImage = "url('Images/backgroundSandyMenu.png')";
+    let menu = document.getElementById('menu');
+    let endingScreen = document.getElementById('endingScreen');
     menu.style.display = "block";
     body.className = "menuStyle";
     endingScreen.style.display = "none";
@@ -845,6 +856,13 @@ function restart() {
     document.getElementById('player2word').value = "";
 
     // Reset des animations
+    let container = document.getElementById('container');
+    let sceneBaston = document.getElementById('baston')
+    let whiteScreen = document.getElementById('altback');
+    let healthP1 = document.getElementById('bar1');
+    let healthP2 = document.getElementById('bar2');
+    let vsimg = document.getElementById('vs-img');
+    let koimg = document.getElementById('ko-img');
     container.className = "";
     message.className = "";
     message.style.display = "none";
@@ -852,7 +870,6 @@ function restart() {
     healthP2.className = "";
     callLetter.style.display = "none";
     sceneBaston.style.display = "none";
-    header.className = "";
     perso1.style.display = "block";
     perso2.style.display = "block";
     whiteScreen.style.display = "none";
@@ -898,6 +915,7 @@ function restart() {
 /*============================ FONCTION CHOIX ALEATOIRE MESSAGE DE JEU ===========================*/
 
 function displayMessage(mess) {
+    let container = document.getElementById('container');
     message.className = "animMessage";
     message.style.display = "block";
 
@@ -991,6 +1009,8 @@ function celebration(perso) {
 }
 
 function animSSJP1() {
+    let auraP1sup = document.getElementById('aura1sup');
+
     perso1.src = "Images/Attackperso1_0.png";
     let bottomPerso = 35;
     let bottomAura = 15;
@@ -1055,6 +1075,8 @@ function animSSJP1() {
 }
 
 function animSSJP2() {
+    let auraP2sup = document.getElementById('aura2sup');
+
     perso2.src = "Images/victoryperso2.png";
     let bottomPerso = 35;
     let bottomAura = 28;
@@ -1184,8 +1206,8 @@ function laserAttackP1() {
     }, 550);
     setTimeout(() => {
         perso1.src = "Images/Attackperso1_3.png";
-        roundP1.style.display = "block";
-        roundP1.style.height = 1 + "%";
+        laserP1.style.display = "block";
+        laserP1.style.height = 1 + "%";
         laserSound.play();
     }, 700);
 
@@ -1196,40 +1218,40 @@ function laserAttackP1() {
 
     for (let time = 700; time < 1270; time += 15) {
         setTimeout(() => {
-            roundP1.style.width = width + "%";
-            roundP1.style.height = height + "%";
+            laserP1.style.width = width + "%";
+            laserP1.style.height = height + "%";
             width += 2.4;
             height += 1.5;
             blinky++;
             margin -= 0.12;
             if (blinky % 5 == 0) {
-                roundP1.style.display = "none";
-                roundP1.style.marginTop = margin + "%";
+                laserP1.style.display = "none";
+                laserP1.style.marginTop = margin + "%";
             }
             if (blinky % 5 == 1) {
-                roundP1.style.display = "block";
+                laserP1.style.display = "block";
             }
         }, time)
     }
     for (let time = 1900; time < 2800; time += 15) {
         setTimeout(() => {
-            roundP1.style.height = height + "%";
+            laserP1.style.height = height + "%";
             height -= 1.5;
             blinky++;
             margin += 0.1;
             if (blinky % 5 == 0) {
-                roundP1.style.display = "none";
+                laserP1.style.display = "none";
                 if (time < 2500) {
-                    roundP1.style.marginTop = margin + "%";
+                    laserP1.style.marginTop = margin + "%";
                 }
             }
             if (blinky % 5 == 1) {
-                roundP1.style.display = "block";
+                laserP1.style.display = "block";
             }
         }, time)
     }
     setTimeout(() => {
-        roundP1.style.display = "none";
+        laserP1.style.display = "none";
         perso1.src = "Images/Attackperso1_0.png";
     }, 2800);
     setTimeout(() => {
@@ -1256,8 +1278,8 @@ function laserAttackP2() {
     }, 550);
     setTimeout(() => {
         perso2.src = "Images/Attackperso2_3.png";
-        roundP2.style.display = "block";
-        roundP2.style.height = 1 + "%";
+        laserP2.style.display = "block";
+        laserP2.style.height = 1 + "%";
         laserSound.play();
     }, 700);
 
@@ -1268,40 +1290,40 @@ function laserAttackP2() {
 
     for (let time = 700; time < 1270; time += 15) {
         setTimeout(() => {
-            roundP2.style.width = width + "%";
-            roundP2.style.height = height + "%";
+            laserP2.style.width = width + "%";
+            laserP2.style.height = height + "%";
             width += 2.4;
             height += 1.5;
             blinky++;
             margin -= 0.098;
             if (blinky % 5 == 0) {
-                roundP2.style.display = "none";
-                roundP2.style.marginTop = margin + "%";
+                laserP2.style.display = "none";
+                laserP2.style.marginTop = margin + "%";
             }
             if (blinky % 5 == 1) {
-                roundP2.style.display = "block";
+                laserP2.style.display = "block";
             }
         }, time)
     }
     for (let time = 1900; time < 2800; time += 15) {
         setTimeout(() => {
-            roundP2.style.height = height + "%";
+            laserP2.style.height = height + "%";
             height -= 1.5;
             blinky++;
             margin += 0.09;
             if (blinky % 5 == 0) {
-                roundP1.style.display = "none";
+                laserP1.style.display = "none";
                 if (time < 2500) {
-                    roundP2.style.marginTop = margin + "%";
+                    laserP2.style.marginTop = margin + "%";
                 }
             }
             if (blinky % 5 == 1) {
-                roundP2.style.display = "block";
+                laserP2.style.display = "block";
             }
         }, time)
     }
     setTimeout(() => {
-        roundP2.style.display = "none";
+        laserP2.style.display = "none";
         perso2.src = "Images/Attackperso2_0.png";
     }, 2800);
     setTimeout(() => {
@@ -1316,6 +1338,11 @@ function laserAttackP2() {
 }
 
 function laserfinishP1() {
+    let container = document.getElementById('container');
+    let body = document.getElementById('body');
+    let whiteScreen = document.getElementById('altback');
+    let vsimg = document.getElementById('vs-img');
+    let koimg = document.getElementById('ko-img');
     anim.style.display = "none";
     whiteScreen.style.display = "block";
     let laserSound = new Audio('Son/SFX_laser.mp3');
@@ -1377,8 +1404,8 @@ function laserfinishP1() {
     }, 550);
     setTimeout(() => {
         perso1.src = "Images/Attackperso1_3.png";
-        roundP1.style.display = "block";
-        roundP1.style.height = 1 + "%";
+        laserP1.style.display = "block";
+        laserP1.style.height = 1 + "%";
         laserSound.play();
         container.className = "finalShake";
     }, 700);
@@ -1392,18 +1419,18 @@ function laserfinishP1() {
 
     for (let time = 700; time < 1270; time += 15) {
         setTimeout(() => {
-            roundP1.style.width = width + "%";
-            roundP1.style.height = height + "%";
+            laserP1.style.width = width + "%";
+            laserP1.style.height = height + "%";
             width += 4;
             height += 8;
             blinky++;
             margin -= 0.6;
             if (blinky % 4 == 0) {
-                roundP1.style.display = "none";
-                roundP1.style.marginTop = margin + "%";
+                laserP1.style.display = "none";
+                laserP1.style.marginTop = margin + "%";
             }
             if (blinky % 4 == 1) {
-                roundP1.style.display = "block";
+                laserP1.style.display = "block";
             }
         }, time)
     }
@@ -1414,10 +1441,10 @@ function laserfinishP1() {
             opacity += 0.01;
             blinky++;
             if (blinky % 4 == 0) {
-                roundP1.style.display = "none";
+                laserP1.style.display = "none";
             }
             if (blinky % 4 == 1) {
-                roundP1.style.display = "block";
+                laserP1.style.display = "block";
             }
         }, time)
     }
@@ -1428,16 +1455,16 @@ function laserfinishP1() {
 
     for (let time = 4000; time < 4900; time += 15) {
         setTimeout(() => {
-            roundP1.style.left = left + "%";
+            laserP1.style.left = left + "%";
             whiteScreen.style.opacity = opacity;
             opacity -= 0.05;
             left += 2;
             blinky++;
             if (blinky % 4 == 0) {
-                roundP1.style.display = "none";
+                laserP1.style.display = "none";
             }
             if (blinky % 4 == 1) {
-                roundP1.style.display = "block";
+                laserP1.style.display = "block";
             }
             if (time >= 4000) {
                 victory(1);
@@ -1445,7 +1472,7 @@ function laserfinishP1() {
         }, time)
     }
     setTimeout(() => {
-        roundP1.style.display = "none";
+        laserP1.style.display = "none";
         perso1.src = "Images/victoryperso1.png";
     }, 4900);
     setTimeout(() => {
@@ -1459,13 +1486,18 @@ function laserfinishP1() {
     }, 2220);
     setTimeout(() => {
         perso2.className = "";
-        roundP1.style.left = 23 + "%";
+        laserP1.style.left = 23 + "%";
         whiteScreen.style.display = "none";
         auraP2.style.display = "none";
     }, 5000);
 }
 
 function laserfinishP2() {
+    let container = document.getElementById('container');
+    let body = document.getElementById('body');
+    let whiteScreen = document.getElementById('altback');
+    let vsimg = document.getElementById('vs-img');
+    let koimg = document.getElementById('ko-img');
     anim.style.display = "none";
     whiteScreen.style.display = "block";
     let laserSound = new Audio('Son/SFX_laser.mp3');
@@ -1528,8 +1560,8 @@ function laserfinishP2() {
     }, 550);
     setTimeout(() => {
         perso2.src = "Images/Attackperso2_3.png";
-        roundP2.style.display = "block";
-        roundP2.style.height = 1 + "%";
+        laserP2.style.display = "block";
+        laserP2.style.height = 1 + "%";
         laserSound.play();
         container.className = "finalShake";
     }, 700);
@@ -1543,18 +1575,18 @@ function laserfinishP2() {
 
     for (let time = 700; time < 1270; time += 15) {
         setTimeout(() => {
-            roundP2.style.width = width + "%";
-            roundP2.style.height = height + "%";
+            laserP2.style.width = width + "%";
+            laserP2.style.height = height + "%";
             width += 4;
             height += 8;
             blinky++;
             margin -= 0.6;
             if (blinky % 4 == 0) {
-                roundP2.style.display = "none";
-                roundP2.style.marginTop = margin + "%";
+                laserP2.style.display = "none";
+                laserP2.style.marginTop = margin + "%";
             }
             if (blinky % 4 == 1) {
-                roundP2.style.display = "block";
+                laserP2.style.display = "block";
             }
         }, time)
     }
@@ -1565,10 +1597,10 @@ function laserfinishP2() {
             opacity += 0.01;
             blinky++;
             if (blinky % 4 == 0) {
-                roundP2.style.display = "none";
+                laserP2.style.display = "none";
             }
             if (blinky % 4 == 1) {
-                roundP2.style.display = "block";
+                laserP2.style.display = "block";
             }
         }, time)
     }
@@ -1579,16 +1611,16 @@ function laserfinishP2() {
 
     for (let time = 4000; time < 4900; time += 15) {
         setTimeout(() => {
-            roundP2.style.right = right + "%";
+            laserP2.style.right = right + "%";
             whiteScreen.style.opacity = opacity;
             opacity -= 0.05;
             right += 2;
             blinky++;
             if (blinky % 4 == 0) {
-                roundP2.style.display = "none";
+                laserP2.style.display = "none";
             }
             if (blinky % 4 == 1) {
-                roundP2.style.display = "block";
+                laserP2.style.display = "block";
             }
             if (time >= 4000) {
                 koimg.style.display = "none";
@@ -1597,7 +1629,7 @@ function laserfinishP2() {
         }, time)
     }
     setTimeout(() => {
-        roundP2.style.display = "none";
+        laserP2.style.display = "none";
         perso2.src = "Images//victoryperso2.png";
     }, 4900);
     setTimeout(() => {
@@ -1611,7 +1643,7 @@ function laserfinishP2() {
     }, 2220);
     setTimeout(() => {
         perso1.className = "";
-        roundP2.style.right = 23 + "%";
+        laserP2.style.right = 23 + "%";
         whiteScreen.style.display = "none";
         auraP1.style.display = "none";
     }, 5000);

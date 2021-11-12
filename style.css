@@ -373,7 +373,7 @@ button {
     z-index:7;
 }
 
-#roundP1 {
+#laserP1 {
     position: absolute;
     height:0%;
     background: rgb(255,255,255);
@@ -386,7 +386,7 @@ button {
     border-radius: 40%;
 }
 
-#roundP2 {
+#laserP2 {
     position: absolute;
     height:0%;
     background: rgb(255,255,255);
