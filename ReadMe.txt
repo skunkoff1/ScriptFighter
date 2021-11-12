@@ -1,6 +1,6 @@
 Script Fighter : The Word Warrior 
 
-Version Official Release : november, 15th, 2021
+Official Release november, 15th, 2021
 Credits : Original graphism and music  by : Sandy WEBERT
 	  Animations and code by : Philippe HEARD and Damien DIDRICH (aka Skunkoff)
 	  
@@ -19,7 +19,7 @@ This game can be played online (recommended) or locally.
 
 1. HOW TO PLAY WITHOUT AN INTERNET CONNECTION (ADVANCED INFORMATIC OR RECKLESS USER !)
 
-This game use an API online which chek intop a 411000 words in French and shortly ****** words in English on lists, 
+This game uses an online API that checks a 411000 French words list and an upcoming English list, 
 it's easier to play online.
 But you can play locally by following these instructions :
 
