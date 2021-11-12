@@ -1051,7 +1051,7 @@ function animSSJP1() {
 
     setTimeout(() => {
         perso1.src = "Images/Spriteperso1.gif";
-        AuraP1sup.style.display = "none";
+        auraP1sup.style.display = "none";
     }, 2100);
 }
 
