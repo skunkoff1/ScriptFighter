@@ -327,6 +327,7 @@ function checkHours() {
         stage = 1;
         name.style.color = "white";
         slotNameP1.className = "lightname";
+        blink.style.color = "white"; 
     }
     else {
         music = new Audio('Son/Stage_2.mp3');
@@ -346,6 +347,7 @@ function checkHours() {
         stage = 1;
         name.style.color = "white";
         slotNameP1.className = "lightname";
+        blink.style.color = "white";
     }
     else {
         music = new Audio('Son/Stage_2.mp3');
