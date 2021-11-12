@@ -750,7 +750,6 @@ function nextTurn() {
     anim.className = "anim";
 
     // Reset des autres animations de jeu
-    container.className = "";
     message.className = "";
     message.style.display = "none";
     good.style.display = "none";
@@ -853,6 +852,7 @@ function restart() {
     healthP2.className = "";
     callLetter.style.display = "none";
     sceneBaston.style.display = "none";
+    header.className = "";
     perso1.style.display = "block";
     perso2.style.display = "block";
     whiteScreen.style.display = "none";
@@ -1024,8 +1024,8 @@ function animSSJP1() {
             auraP1sup.style.width = widthAura + "px";
             auraP1sup.style.left = widthLeft + "%";
             auraP1sup.style.bottom = bottomAuraSup + "%";
-            auraP1sup.style.opacity = opacityAuraSup ;
-            opacityAuraSup -=0.1;
+            auraP1sup.style.opacity = opacityAuraSup;
+            opacityAuraSup -= 0.1;
             bottomAuraSup -= 10;
             widthLeft -= 2.88;
             widthAura += 128;
@@ -1033,11 +1033,11 @@ function animSSJP1() {
     }
 
     for (let time = 1200; time < 1700; time += 15) {
-        setTimeout(() => {            
+        setTimeout(() => {
             perso1.style.bottom = bottomPerso + "%";
             auraP1.style.bottom = bottomAura + "%";
             bottomPerso -= 2.5;
-            bottomAura -= 2.5;            
+            bottomAura -= 2.5;
         }, time);
     }
 
@@ -1088,8 +1088,8 @@ function animSSJP2() {
             auraP2sup.style.width = widthAura + "px";
             auraP2sup.style.right = widthRight + "%";
             auraP2sup.style.bottom = bottomAuraSup + "%";
-            auraP2sup.style.opacity = opacityAuraSup ;
-            opacityAuraSup -=0.1;
+            auraP2sup.style.opacity = opacityAuraSup;
+            opacityAuraSup -= 0.1;
             bottomAuraSup -= 10;
             widthRight -= 2.88;
             widthAura += 128;
@@ -1259,7 +1259,7 @@ function laserAttackP2() {
         perso2.src = "Images/Attackperso2_3.png";
         roundP2.style.display = "block";
         roundP2.style.height = 1 + "%";
-        laserSound.play();       
+        laserSound.play();
     }, 700);
 
     let height = 1;
