@@ -974,7 +974,6 @@ function celebration(perso) {
     var stringPerso;
     if (perso == perso1) {
         stringPerso = "perso1";
-        console.log("fonction");
     }
     else if (perso == perso2) {
         stringPerso = "perso2";
