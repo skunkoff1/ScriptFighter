@@ -5,6 +5,9 @@
 // Flag joueur en cours
 let player = 1;
 
+// Flag choix du stage
+let stage = 1;
+
 // variables mots joueur
 let wordP1Upper;
 let wordP2Upper;
@@ -311,50 +314,47 @@ function checkHours() {
 
     let body = document.getElementById('body');
     let name = document.getElementById('name');
-    let light = document.getElementsByClassName('lightname');
+    let slotNameP1 = document.getElementById('nameP1');
+    let slotNameP2 = document.getElementById('nameP2');
 
     date = new Date();
-
+    /*
     // Fonction changeant de stage toutes les minutes
     minute = date.getMinutes();
     if (minute % 2 == 0) {
         music = new Audio('Son/script_Fighter.mp3');
         body.style.backgroundImage = "url('Images/backgroundSandy.png')"; 
-        
+        stage = 1;
         name.style.color = "white";
-        light.style.color = "aliceblue";
-        light.style.backgroundColor = "rgba(37,39,39,0.753)";
+        slotNameP1.className = "lightname";
     }
     else {
         music = new Audio('Son/Stage_2.mp3');
         body.style.backgroundImage = "url('Images/STAGE2.gif')";
-
+        stage =2;
         name.style.color = "rgb(96, 173, 148)";
-        light.style.color = "rgb(160,214,60)";
-        light.style.backgroundColor = "rgba(158, 142, 142, 0.753)";
-        blink.style.color = "rgb(157, 248, 255)";
-    }
+        slotNameP1.className = "lightname2";
+        blink.style.color = "rgb(157, 248, 255)";   
+    }*/
 
     // Fonction changeant de stage en fonction de l'heure de la journée
-    /*
+    
     hour = date.getHours();
     if ((hour >= 9) && (hour <= 18)) {
         music = new Audio('Son/script_Fighter.mp3');
         body.style.backgroundImage = "url('Images/backgroundSandy.png')";
-
+        stage = 1;
         name.style.color = "white";
-        light.style.color = "aliceblue";
-        light.style.backgroundColor = "rgba(37,39,39,0.753)";
+        slotNameP1.className = "lightname";
     }
     else {
         music = new Audio('Son/Stage_2.mp3');
         body.style.backgroundImage = "url('Images/STAGE2.gif')";
-
+        stage =2;
         name.style.color = "rgb(96, 173, 148)";
-        light.style.color = "rgb(160,214,60)";
-        light.style.backgroundColor = "rgba(158, 142, 142, 0.753)";
+        slotNameP1.className = "lightname2";
         blink.style.color = "rgb(157, 248, 255)";
-    }*/
+    }
 }
 
 /*====================== FONCTION APPELE LORS DU GUESS JOUEUR ==========================*/
@@ -733,7 +733,13 @@ function nextTurn() {
         let slotNameP2 = document.getElementById('nameP2');
 
         slotNameP1.className = "";
-        slotNameP2.className = "lightname";
+        if(stage == 1) {
+            slotNameP2.className = "lightname";
+        }
+        else {
+            slotNameP2.className = "lightname2"; 
+        }
+        
         pTurnName.innerHTML = nameP2;
 
     } else if (player == 2) {
@@ -757,7 +763,12 @@ function nextTurn() {
         let slotNameP1 = document.getElementById('nameP1');
         let slotNameP2 = document.getElementById('nameP2');
 
-        slotNameP1.className = "lightname";
+        if(stage == 1) {
+            slotNameP1.className = "lightname";
+        }
+        else {
+            slotNameP1.className = "lightname2"; 
+        }
         slotNameP2.className = "";
         pTurnName.innerHTML = nameP1;
     }
@@ -922,6 +933,7 @@ function restart() {
     fireP2 = 0;
     turn = 1;
     player = 1;
+    stage = 1;
 
     // Reset des barres de vie
     healthP1.style.width = p1Hp * 2.9 + "%";

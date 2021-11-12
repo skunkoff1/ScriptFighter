@@ -241,7 +241,7 @@ button {
 
 #name {
     margin-top: 8vh;
-    color:aquamarine;
+    color:white;
 }
 
 #nameP1 {
@@ -264,8 +264,14 @@ button {
 }
 
 .lightname {
-    background-color:rgba(158, 142, 142, 0.753);
-    color:rgb(160, 214, 60);
+    background-color:rgba(37,39,39,0.753);
+    color:aliceblue;
+    border-radius:30%;
+}
+
+.lightname2 {
+    background-color:rgba(37,39,39,0.753);
+    color:aliceblue;
     border-radius:30%;
 }
 
