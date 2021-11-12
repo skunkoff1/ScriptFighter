@@ -284,6 +284,7 @@ function launchGame() {
     // Focus sur la guess box
     playerAnswer.focus();
 
+    // Fonction changement de stage en fonction des minutes
     checkHours();
 
     // fonction lancement musique
@@ -309,6 +310,8 @@ function launchGame() {
 function checkHours() {
 
     let body = document.getElementById('body');
+    let name = document.getElementById('name');
+    let light = document.getElementsByClassName('lightname');
 
     date = new Date();
 
@@ -316,11 +319,20 @@ function checkHours() {
     minute = date.getMinutes();
     if (minute % 2 == 0) {
         music = new Audio('Son/script_Fighter.mp3');
-        body.style.backgroundImage = "url('Images/backgroundSandy.png')";
+        body.style.backgroundImage = "url('Images/backgroundSandy.png')"; 
+        
+        name.style.color = "white";
+        light.style.color = "aliceblue";
+        light.style.backgroundColor = "rgba(37,39,39,0.753)";
     }
     else {
         music = new Audio('Son/Stage_2.mp3');
         body.style.backgroundImage = "url('Images/STAGE2.gif')";
+
+        name.style.color = "rgb(96, 173, 148)";
+        light.style.color = "rgb(160,214,60)";
+        light.style.backgroundColor = "rgba(158, 142, 142, 0.753)";
+        blink.style.color = "rgb(157, 248, 255)";
     }
 
     // Fonction changeant de stage en fonction de l'heure de la journée
@@ -329,10 +341,19 @@ function checkHours() {
     if ((hour >= 9) && (hour <= 18)) {
         music = new Audio('Son/script_Fighter.mp3');
         body.style.backgroundImage = "url('Images/backgroundSandy.png')";
+
+        name.style.color = "white";
+        light.style.color = "aliceblue";
+        light.style.backgroundColor = "rgba(37,39,39,0.753)";
     }
     else {
         music = new Audio('Son/Stage_2.mp3');
         body.style.backgroundImage = "url('Images/STAGE2.gif')";
+
+        name.style.color = "rgb(96, 173, 148)";
+        light.style.color = "rgb(160,214,60)";
+        light.style.backgroundColor = "rgba(158, 142, 142, 0.753)";
+        blink.style.color = "rgb(157, 248, 255)";
     }*/
 }
 

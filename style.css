@@ -46,7 +46,7 @@ body {
 .menuStyle {    
     color:rgb(235, 98, 35);
     text-shadow: 1px 1px 1px rgb(0, 0, 0);
-    background-image: url('Images/backgroundSandyMenu.png');
+    background-image: url('Images/backgroundSandyMenu.png');  
     background-color: black;
     z-index: 0;
 }
@@ -139,7 +139,7 @@ fieldset {
 }
 
 .gameStyle {
-    background-image: url('Images/backgroundSandy.png');    
+    background-image: url('Images/STAGE2.gif');    /*Images/backgroundSandy.png*/
 }
 
 button {
@@ -241,6 +241,7 @@ button {
 
 #name {
     margin-top: 8vh;
+    color:aquamarine;
 }
 
 #nameP1 {
@@ -263,8 +264,8 @@ button {
 }
 
 .lightname {
-    background-color:rgba(37, 39, 39, 0.753);
-    color:aliceblue;
+    background-color:rgba(158, 142, 142, 0.753);
+    color:rgb(160, 214, 60);
     border-radius:30%;
 }
 
@@ -272,7 +273,7 @@ button {
 
 #underscoreArrays {
     font-size: 70px;
-    color:white;
+    color:rgb(157, 248, 255);
     text-shadow: 2px 2px 2px black;
     letter-spacing:0.5em;
     flex:3;
