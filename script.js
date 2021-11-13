@@ -44,12 +44,6 @@ let musicAllowed = true;
 
 /*====================== VARIABLES AFFICHAGE MESSAGE JEU ======================*/
 
-// Input menu début de jeu
-let musicButton = document.getElementById('musicButton');
-
-// gestion message changement de tour
-let turnMsg = document.getElementById('turnMsg');
-
 // affichage mot joueur
 let blink = document.getElementById('underscoreArrays');
 let p1w = document.getElementById('p1Word');
@@ -74,16 +68,13 @@ let auraP2 = document.getElementById('aura2');
 let laserP1 = document.getElementById('laserP1');
 let laserP2 = document.getElementById('laserP2');
 
-// animation changement de tour
-let anim = document.getElementById('animation-container');
-let animPlayer = document.getElementById('turnPlayer');
-
 /*==============================================================================*/
 /*=============================== FONCTIONS ====================================*/
 /*==============================================================================*/
 
 // Fonction du bouton music ON / OFF
 function musicAllow() {
+    let musicButton = document.getElementById('musicButton');
     if (musicAllowed) {
         menuMusic.pause();
         musicAllowed = false;
@@ -384,6 +375,7 @@ function play() {
     // Reset des animations et des variables utiles au check
     let fightdiv = document.getElementById('fightmsg');
     let fightimg = document.getElementById('fightimg');
+    let anim = document.getElementById('animation-container');
     anim.className = "";
     fightdiv.className = "";
     fightimg.style.display = "none";
@@ -711,6 +703,7 @@ function checkHealth() {
 function nextTurn() {
     let pTurnName = document.getElementById('pTurnName');
     let guessButton = document.getElementById('answerSubmit');
+    let anim = document.getElementById('animation-container');
 
     if (player == 1) {
 
@@ -897,6 +890,7 @@ function restart() {
     let healthP2 = document.getElementById('bar2');
     let vsimg = document.getElementById('vs-img');
     let koimg = document.getElementById('ko-img');
+    let animPlayer = document.getElementById('turnPlayer');
     container.className = "";
     message.className = "";
     message.style.display = "none";
@@ -1005,6 +999,7 @@ function getTurnMessage() {
         "Montre lui qui est le patron !",
         "cachez vous, il arrive !"
     ];
+    let turnMsg = document.getElementById('turnMsg');
     turnMsg.innerHTML = arrayTurn[Math.floor(Math.random() * arrayTurn.length)];
 }
 
@@ -1378,6 +1373,7 @@ function laserfinishP1() {
     let whiteScreen = document.getElementById('altback');
     let vsimg = document.getElementById('vs-img');
     let koimg = document.getElementById('ko-img');
+    let anim = document.getElementById('animation-container');
     anim.style.display = "none";
     whiteScreen.style.display = "block";
     let laserSound = new Audio('Son/SFX_laser.mp3');
@@ -1533,6 +1529,7 @@ function laserfinishP2() {
     let whiteScreen = document.getElementById('altback');
     let vsimg = document.getElementById('vs-img');
     let koimg = document.getElementById('ko-img');
+    let anim = document.getElementById('animation-container');
     anim.style.display = "none";
     whiteScreen.style.display = "block";
     let laserSound = new Audio('Son/SFX_laser.mp3');
