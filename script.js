@@ -396,11 +396,9 @@ function play() {
     }
     else if (answer.length == 1) {
         checkLetter(answer, player);
-        launchNextTurn();
     }
     else {
-        checkWord(answer, player);
-        launchNextTurn();
+        checkWord(answer, player);        
     }
 }
 
@@ -427,7 +425,9 @@ function launchNextTurn() {
 /*=================== FONCTION VERIFICATION GUESS JOUEUR ==================*/
 
 function checkLetter(letter, player) {
+
     let mess;
+    let ending = false;
     // GESTION JOUEUR 1
     if (player == 1) {
         // Si la lettre n'a pas encore été tentée
@@ -452,15 +452,13 @@ function checkLetter(letter, player) {
 
             // Si lettre présente dans le mot    
             } else {
-                mess = "good";
-                displayMessage(mess);
-                displayWord(player);
-                fireP1++;
-                // Mise a jour de l'underscore pour l'afffichage en jeu
+
+                // Mise a jour de l'underscore pour l'afffichage en jeu et la vérification
                 underToString(underscoreP2);
 
                 // Si mot est complet
                 if (verify === wordP2Upper) {
+                    ending = true;
                     setTimeout(() => {
                         finishHim(1);
                     }, 1500);
@@ -468,6 +466,12 @@ function checkLetter(letter, player) {
                 // Si mot incomplet
                 else if (fireP1 != 3) {
                     celebration(perso1);
+                }
+                mess = "good";
+                displayWord(player);
+                fireP1++;
+                if (ending == false) {
+                    displayMessage(mess);
                 }
             }
         }
@@ -504,15 +508,13 @@ function checkLetter(letter, player) {
 
             // Si lettre présente dans le mot    
             } else {
-                mess = "good";
-                displayMessage(mess);
-                displayWord(player);
-                fireP2++;
+
                 // Mise a jour de l'underscore pour l'affichage en jeu
                 underToString(underscoreP1);
 
                 // Si mot complet
                 if (verify === wordP1Upper) {
+                    ending = true;absentLetter
                     setTimeout(() => {
                         finishHim(2);
                     }, 1500);
@@ -520,6 +522,13 @@ function checkLetter(letter, player) {
                 // Si mot incomplet
                 else if (fireP2 != 3) {
                     celebration(perso2);
+                }
+                mess = "good";
+                displayWord(player);
+                fireP2++;
+
+                if (ending == false) {
+                    displayMessage(mess);
                 }
             }
         }
@@ -555,6 +564,10 @@ function checkLetter(letter, player) {
         good.innerHTML = nameP2 + " is on fire";
         animSSJP2();
     }
+
+    if (ending == false) {
+        launchNextTurn();
+    }
 }
 
 //check de l'équivalence mot lorsque le joueur entre plus d'une lettre
@@ -576,6 +589,7 @@ function checkWord(word, player) {
             playerDamage(player);
             container.className = "shake";
             fireP1 = 0;
+            launchNextTurn();
         }
     // Gestion joueur 2
     } else if (player == 2) {
@@ -592,6 +606,7 @@ function checkWord(word, player) {
             playerDamage(player);
             container.className = "shake";
             fireP2 = 0;
+            launchNextTurn();
         }
     }
 }
@@ -786,7 +801,7 @@ function nextTurn() {
     getTurnMessage();
 
     // Appel de l'animation de changement de tour
-    turnPlayer.style.display = "block";
+    turnPlayer.style.display = "block";    
     anim.className = "anim";
 
     // Reset des autres animations de jeu
@@ -924,7 +939,10 @@ function restart() {
     koimg.style.left = "45.2%";
 
     let animPlayer = document.getElementById('turnPlayer');
-    animPlayer.style.display = "none";
+    animPlayer.style.display = "block";
+
+    let anim = document.getElementById('animation-container');
+    anim.style.display = "block";
     
     message.className = "";
     message.style.display = "none";
