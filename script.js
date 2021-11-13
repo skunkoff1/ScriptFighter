@@ -836,7 +836,7 @@ function nextTurn() {
 
 // Fonction qui lance le finish
 function finishHim(player) {
-    message.style.display = "none";
+    
     let finish = document.getElementById('finishDiv');
     finish.style.display = "block";
     setTimeout(() => {
