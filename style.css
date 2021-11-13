@@ -271,7 +271,7 @@ button {
 
 .lightname2 {
     background-color:rgba(158, 142, 142, 0.753);
-    color:rgb(160,214,60);
+    color:rgb(217, 255, 0);
     border-radius:30%;
 }
 
@@ -279,7 +279,7 @@ button {
 
 #underscoreArrays {
     font-size: 70px;
-    color:rgb(157, 248, 255);
+    color:rgb(217, 255, 0);
     text-shadow: 2px 2px 2px black;
     letter-spacing:0.5em;
     flex:3;
@@ -408,7 +408,7 @@ button {
 
 /*========================== ANIMATION =========================== */
 
-.blink {
+.blink1 {
     animation-name: good;
     animation-duration: 0.2s;
     animation-iteration-count: 4;    
@@ -420,6 +420,21 @@ button {
     } 
     100%{        
         color: rgb(217, 255, 0);
+    }
+}
+
+.blink2 {
+    animation-name: good2;
+    animation-duration: 0.2s;
+    animation-iteration-count: 4;    
+}
+
+@keyframes good2 {
+    0%{        
+        color: rgb(217, 255, 0);
+    } 
+    100%{        
+        color: rgb(7, 165, 7);
     }
 }
 

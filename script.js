@@ -7,6 +7,7 @@ let player = 1;
 
 // Flag choix du stage
 let stage = 1;
+let lightning;
 
 // variables mots joueur
 let wordP1Upper;
@@ -321,15 +322,17 @@ function checkHours() {
         stage = 1;
         name.style.color = "white";
         slotNameP1.className = "lightname";
-        blink.style.color = "white"; 
+        blink.style.color = "white";
+        lightning = "blink1"; 
     }
     else {
         music = new Audio('Son/Stage_2.mp3');
         body.style.backgroundImage = "url('Images/STAGE2.gif')";
-        stage =2;
+        stage = 2;
         name.style.color = "rgb(96, 173, 148)";
         slotNameP1.className = "lightname2";
-        blink.style.color = "rgb(157, 248, 255)";   
+        blink.style.color = "rgb(217, 255, 0)";  
+        lightning = "blink2";  
     }
     /*
     // Fonction changeant de stage en fonction de l'heure de la journée
@@ -342,14 +345,16 @@ function checkHours() {
         name.style.color = "white";
         slotNameP1.className = "lightname";
         blink.style.color = "white";
+        lightning = "blink1";
     }
     else {
         music = new Audio('Son/Stage_2.mp3');
         body.style.backgroundImage = "url('Images/STAGE2.gif')";
-        stage =2;
+        stage = 2;
         name.style.color = "rgb(96, 173, 148)";
         slotNameP1.className = "lightname2";
-        blink.style.color = "rgb(157, 248, 255)";
+        blink.style.color = "rgb(217, 255, 0)";
+        lightning = "blink2";
     }*/
 }
 
@@ -578,7 +583,7 @@ function checkWord(word, player) {
     if (player == 1) {
         if (word == wordP2Upper) {
             p2w.innerHTML = wordP2Upper;
-            blink.className = "blink";
+            blink.className = lightning;
             answerbox.style.display = "none";
             setTimeout(() => {
                 finishHim(1);
@@ -596,7 +601,7 @@ function checkWord(word, player) {
         if (word == wordP1Upper) {
             p1w.innerHTML = wordP1Upper;
             answerbox.style.display = "none";
-            blink.className = "blink";
+            blink.className = lightning;
             setTimeout(() => {
                 finishHim(2);
             }, 1500);
@@ -990,7 +995,7 @@ function displayMessage(mess) {
 
     if (mess == "good") {
         good.style.display = "block";
-        blink.className = "blink";
+        blink.className = lightning;
     }
     else if (mess == "absent") {
         absentLetter.style.display = "block";
