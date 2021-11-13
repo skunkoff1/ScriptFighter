@@ -238,15 +238,22 @@ function launchGame() {
     // Affichage du conteneur de jeu, on cache le menu
     let menu = document.getElementById('menu');
     let body = document.getElementById('body');
-    let sceneBaston = document.getElementById('baston');
-    body.className = "gameStyle";
-    menu.style.display = "none";
     let container = document.getElementById('container');
+    let sceneBaston = document.getElementById('baston');
+    menu.style.display = "none";
+    body.className = "gameStyle";
     container.style.display = "block";
     sceneBaston.style.display = "flex";
 
+    // Récupération nom joueur
     nameP2 = document.getElementById('player2name').value;
     nameP1 = document.getElementById('player1name').value;
+
+    // Affichage nom joueur
+    let slotNameP1 = document.getElementById('nameP1');
+    let slotNameP2 = document.getElementById('nameP2');
+    slotNameP1.innerHTML = nameP1;
+    slotNameP2.innerHTML = nameP2;
 
     // Appel de l'animation de remplissage des barres de vies
     let healthP1 = document.getElementById('bar1');
@@ -264,21 +271,18 @@ function launchGame() {
     // Création tableaux de vérification des mots
     arrayP1 = wordP1Upper.split('');
     arrayP2 = wordP2Upper.split('');
-
     createUnderscore(arrayP1, arrayP2);
-    displayWord(1);
-    let slotNameP1 = document.getElementById('nameP1');
-    let slotNameP2 = document.getElementById('nameP2');
+    
+    // Affichage mot joueur 1
+    displayWord(1); 
 
-    slotNameP1.innerHTML = nameP1;
-    slotNameP2.innerHTML = nameP2;
-
+    // Flag "en cours de jeu"
     inGame = true;
 
     // Focus sur la guess box
     playerAnswer.focus();
 
-    // Fonction changement de stage en fonction des minutes
+    // Fonction changement de stage en fonction des minutes / ou de l'heure de la journée
     checkHours();
 
     // fonction lancement musique
@@ -300,13 +304,12 @@ function launchGame() {
     }
 }
 
-// fonction pour afficher le stage et sa musique en fonction de l'heure
+// fonction pour afficher le stage et sa musique en fonction de l'heure / ou des minutes
 function checkHours() {
 
     let body = document.getElementById('body');
     let name = document.getElementById('name');
     let slotNameP1 = document.getElementById('nameP1');
-    let slotNameP2 = document.getElementById('nameP2');
 
     date = new Date();
     
@@ -376,11 +379,10 @@ function play() {
     let fightdiv = document.getElementById('fightmsg');
     let fightimg = document.getElementById('fightimg');
     let anim = document.getElementById('animation-container');
-    anim.className = "";
     fightdiv.className = "";
     fightimg.style.display = "none";
     fightimg.className = "";
-    check = false;
+    anim.className = "";    
 
     // Récupération du guess joueur et mise en majuscule    
     let answer = replace(playerAnswer.value);
@@ -402,6 +404,7 @@ function play() {
     }
 }
 
+// Lance le prochain tour et ajuste les timeout en fonction des animations 
 function launchNextTurn() {
 
     let guessButton = document.getElementById('answerSubmit');
@@ -439,7 +442,7 @@ function checkLetter(letter, player) {
                     match++;
                 }
             }
-            //si pas dans le mot
+            // Si lettre non présente dans le mot
             if (match == 0) {
                 mess = "absent";
                 displayMessage(mess);
@@ -447,16 +450,16 @@ function checkLetter(letter, player) {
                 attack = 1;
                 playerDamage(player);
 
-                // si dans le mot    
+            // Si lettre présente dans le mot    
             } else {
                 mess = "good";
                 displayMessage(mess);
                 displayWord(player);
                 fireP1++;
-                // Mise a jour de l'underscore
+                // Mise a jour de l'underscore pour l'afffichage en jeu
                 underToString(underscoreP2);
 
-                // si mot est complet
+                // Si mot est complet
                 if (verify === wordP2Upper) {
                     setTimeout(() => {
                         finishHim(1);
@@ -477,7 +480,7 @@ function checkLetter(letter, player) {
             playerDamage(player);
         }
 
-        // GESTION JOUEUR 2
+    // GESTION JOUEUR 2
     } else if (player == 2) {
         // Si la lettre n'a pas encore été tentée
         if (triesP2.indexOf(letter) === -1) {
@@ -491,7 +494,7 @@ function checkLetter(letter, player) {
                     match++;
                 }
             }
-            //si pas dans le mot
+            // Si lettre non présente pas dans le mot
             if (match == 0) {
                 mess = "absent";
                 displayMessage(mess);
@@ -499,14 +502,16 @@ function checkLetter(letter, player) {
                 fireP2 = 0;
                 attack = 1;
 
-                // Si dans le mot    
+            // Si lettre présente dans le mot    
             } else {
                 mess = "good";
                 displayMessage(mess);
                 displayWord(player);
                 fireP2++;
+                // Mise a jour de l'underscore pour l'affichage en jeu
                 underToString(underscoreP1);
-                // Mise a jour de l'underscore
+
+                // Si mot complet
                 if (verify === wordP1Upper) {
                     setTimeout(() => {
                         finishHim(2);
@@ -552,7 +557,9 @@ function checkLetter(letter, player) {
 
 //check de l'équivalence mot lorsque le joueur entre plus d'une lettre
 function checkWord(word, player) {
+
     let container = document.getElementById('container');
+    // Gestion Joueur 1
     if (player == 1) {
         if (word == wordP2Upper) {
             p2w.innerHTML = wordP2Upper;
@@ -568,6 +575,7 @@ function checkWord(word, player) {
             container.className = "shake";
             fireP1 = 0;
         }
+    // Gestion joueur 2
     } else if (player == 2) {
         if (word == wordP1Upper) {
             p1w.innerHTML = wordP1Upper;
@@ -596,7 +604,7 @@ function underToString(underscore) {
     return verify;
 }
 
-//fonction qui affiche le mot du joueur ennemi avec ses underscores
+//fonction qui affiche le mot du joueur adverse avec ses underscores
 function displayWord(player) {
     if (player == 1) {
         display = underscoreP2.toString();
@@ -617,6 +625,7 @@ function displayWord(player) {
 
 /*============================== FONCTION GESTION DEGATS ===============================*/
 function displayDamage(player) {
+    // Gestion joueur 2
     if (player == 2) {
         let healthP2 = document.getElementById('bar2');
         if (attack == 1) {
@@ -638,6 +647,7 @@ function displayDamage(player) {
             healthP2.style.width = p2Hp * 2.9 + "%";
         }
     }
+    // Gestion joueur 1
     else if (player == 1) {
         let healthP1 = document.getElementById('bar1');
         if (attack == 1) {
@@ -662,7 +672,7 @@ function displayDamage(player) {
 
 }
 
-//calcul des dégats joueur et check si ils tombent a zéro
+//calcul des dégats joueur et appel du check pour vérifier nombre de points de vie restants
 function playerDamage(player) {
     if (player == 1) {
         if (fireP2 >= 3) {
@@ -686,6 +696,8 @@ function playerDamage(player) {
     }
     checkHealth();
 }
+
+// Vérifie le nombre de points de vie restants
 function checkHealth() {
     if (p1Hp <= 0 || p2Hp <= 0) {
         attack = 3;
@@ -701,6 +713,7 @@ function checkHealth() {
 
 //préparation du tour du joueur suivant
 function nextTurn() {
+
     let pTurnName = document.getElementById('pTurnName');
     let guessButton = document.getElementById('answerSubmit');
     let anim = document.getElementById('animation-container');
@@ -721,7 +734,6 @@ function nextTurn() {
             p2w.style.display = "none";
             displayWord(2);
         }
-
 
         // Permutation nom joueur
         let slotNameP1 = document.getElementById('nameP1');
@@ -758,17 +770,15 @@ function nextTurn() {
         let slotNameP1 = document.getElementById('nameP1');
         let slotNameP2 = document.getElementById('nameP2');
 
+        slotNameP2.className = "";
         if(stage == 1) {
             slotNameP1.className = "lightname";
         }
         else {
             slotNameP1.className = "lightname2"; 
         }
-        slotNameP2.className = "";
         pTurnName.innerHTML = nameP1;
     }
-
-
 
     // Appel de la fonction choississant aléatoirement un message pour le changement de tour
     getTurnMessage();
@@ -804,7 +814,7 @@ function nextTurn() {
     playerAnswer.focus();
 }
 
-/*============================ FONCTION ENDING SCREEN CONDITION DE VICTOIRE=================*/
+/*============================ FONCTION ENDING SCREEN ET CONDITION DE VICTOIRE=================*/
 
 // Fonction qui lance le finish
 function finishHim(player) {
@@ -830,9 +840,9 @@ function finishHim(player) {
 
 //fonction de passage de l'écran jeu à l'écran de fin
 function victory(player) {
+
     let endingString;
     let winnerName;
-
     let endingTitle = document.getElementById('endingTitle');
     let endingText = document.getElementById('endingText');
     let endingScreen = document.getElementById('endingScreen');
@@ -855,6 +865,7 @@ function victory(player) {
     } else {
         console.log("ERREUR variable player invalide dans fonction victory")
     }
+
     endingTitle.innerHTML = "Victoire de " + winnerName + " !";
     endingText.innerHTML = endingString;
     endingScreen.style.display = "flex";
@@ -867,11 +878,11 @@ function restart() {
 
     // Affchaage du menu
     let body = document.getElementById('body');
-    body.style.backgroundImage = "url('Images/backgroundSandyMenu.png')";
     let menu = document.getElementById('menu');
     let endingScreen = document.getElementById('endingScreen');
-    menu.style.display = "block";
+    body.style.backgroundImage = "url('Images/backgroundSandyMenu.png')";
     body.className = "menuStyle";
+    menu.style.display = "block";
     endingScreen.style.display = "none";
 
     // Reset de la guess box et du choix mots joueurs dans le menu 
@@ -884,29 +895,22 @@ function restart() {
 
     // Reset des animations
     let container = document.getElementById('container');
-    let sceneBaston = document.getElementById('baston')
-    let whiteScreen = document.getElementById('altback');
-    let healthP1 = document.getElementById('bar1');
-    let healthP2 = document.getElementById('bar2');
-    let vsimg = document.getElementById('vs-img');
-    let koimg = document.getElementById('ko-img');
-    let animPlayer = document.getElementById('turnPlayer');
     container.className = "";
-    message.className = "";
-    message.style.display = "none";
-    healthP1.className = "";
-    healthP2.className = "";
-    callLetter.style.display = "none";
+
+    let sceneBaston = document.getElementById('baston')
     sceneBaston.style.display = "none";
-    perso1.style.display = "block";
-    perso2.style.display = "block";
+
+    let whiteScreen = document.getElementById('altback');
     whiteScreen.style.display = "none";
     whiteScreen.style.opacity = 0;
-    animPlayer.style.display = "none";
-    auraP1.style.display = "none";
-    auraP2.style.display = "none";
-    perso1.src = "images/Spriteperso1.gif";
-    perso2.src = "images/Spriteperso2.gif";
+
+    let healthP1 = document.getElementById('bar1');
+    let healthP2 = document.getElementById('bar2');
+    healthP1.className = "";
+    healthP2.className = "";
+
+    let vsimg = document.getElementById('vs-img');
+    let koimg = document.getElementById('ko-img');
     vsimg.style.display = "block";
     koimg.src = "Images/VS_KO.gif";
     koimg.style.opacity = 1;
@@ -915,6 +919,19 @@ function restart() {
     koimg.style.width = "148px";
     koimg.style.top = "2%";
     koimg.style.left = "45.2%";
+
+    let animPlayer = document.getElementById('turnPlayer');
+    animPlayer.style.display = "none";
+    
+    message.className = "";
+    message.style.display = "none";
+    callLetter.style.display = "none";
+    perso1.style.display = "block";
+    perso2.style.display = "block";
+    auraP1.style.display = "none";
+    auraP2.style.display = "none";
+    perso1.src = "images/Spriteperso1.gif";
+    perso2.src = "images/Spriteperso2.gif";
 
     // Reset des variables de jeu
     triesP1 = [];
@@ -935,6 +952,7 @@ function restart() {
     healthP1.style.width = p1Hp * 2.9 + "%";
     healthP2.style.width = p2Hp * 2.9 + "%";
 
+    //Gestion musique
     music.pause();
     music.currentTime = 0;
     pressStart();
@@ -944,6 +962,7 @@ function restart() {
 /*============================ FONCTION CHOIX ALEATOIRE MESSAGE DE JEU ===========================*/
 
 function displayMessage(mess) {
+
     let container = document.getElementById('container');
     message.className = "animMessage";
     message.style.display = "block";
@@ -1004,7 +1023,7 @@ function getTurnMessage() {
 }
 
 function getForgetMessage() {
-    var arrayForget = new Array(
+    var arrayForget = [
         "T'as pas de memoire ou bien ?",
         "Deja tente !",
         "un debut d'Alzheimer ?",
@@ -1012,7 +1031,7 @@ function getForgetMessage() {
         "Memoire pleine ?",
         "Cette lettre semble familiere...",
         "Une fois suffit !"
-    );
+    ];
     callLetter.innerHTML = arrayForget[Math.floor(Math.random() * arrayForget.length)];
 }
 
@@ -1039,9 +1058,10 @@ function celebration(perso) {
 }
 
 function animSSJP1() {
-    let auraP1sup = document.getElementById('aura1sup');
 
+    let auraP1sup = document.getElementById('aura1sup');
     perso1.src = "Images/Attackperso1_0.png";
+
     let bottomPerso = 35;
     let bottomAura = 15;
     let bottomAuraSup = 9;
@@ -1063,6 +1083,7 @@ function animSSJP1() {
             bottomAuraSup += 1.5;
         }, time);
     }
+
     setTimeout(() => {
         auraP1.style.display = "block";
         auraP1sup.style.display = "block";
@@ -1105,9 +1126,10 @@ function animSSJP1() {
 }
 
 function animSSJP2() {
-    let auraP2sup = document.getElementById('aura2sup');
 
+    let auraP2sup = document.getElementById('aura2sup');
     perso2.src = "Images/victoryperso2.png";
+
     let bottomPerso = 35;
     let bottomAura = 28;
     let bottomAuraSup = 9;
@@ -1129,6 +1151,7 @@ function animSSJP2() {
             bottomAuraSup += 1.5;
         }, time);
     }
+
     setTimeout(() => {
         auraP2.style.display = "block";
         auraP2sup.style.display = "block";
@@ -1174,11 +1197,13 @@ function animSSJP2() {
 /*===================== FONCTIONS ANIMATION ATTAQUE =========================*/
 
 function blinkDashAttack(perso) {
+
     let punchSound = new Audio('Son/SFX_Punch.mp3');
     punchSound.volume = 0.2;
     var stringPerso;
     var persoOpp;
     var stringOpp;
+
     if (perso == perso1) {
         stringPerso = "perso1";
         persoOpp = perso2;
@@ -1189,8 +1214,10 @@ function blinkDashAttack(perso) {
         persoOpp = perso1;
         stringOpp = "P1";
     }
+
     perso.className = "attack2" + stringPerso;
     perso.src = "Images/Attack" + stringPerso + "_0.png";
+
     setTimeout(() => {
         perso.src = "Images/Attack" + stringPerso + "_1.png";
     }, 390);
@@ -1224,10 +1251,11 @@ function blinkDashAttack(perso) {
 }
 
 function laserAttackP1() {
+
     let laserSound = new Audio('Son/SFX_laserTest.mp3');
     laserSound.volume = 0.2;
-
     perso1.src = "Images/Attackperso1_0.png";
+
     setTimeout(() => {
         perso1.src = "Images/Attackperso1_1.png";
     }, 400);
@@ -1263,6 +1291,7 @@ function laserAttackP1() {
             }
         }, time)
     }
+
     for (let time = 1900; time < 2800; time += 15) {
         setTimeout(() => {
             laserP1.style.height = height + "%";
@@ -1280,6 +1309,7 @@ function laserAttackP1() {
             }
         }, time)
     }
+
     setTimeout(() => {
         laserP1.style.display = "none";
         perso1.src = "Images/Attackperso1_0.png";
@@ -1296,10 +1326,11 @@ function laserAttackP1() {
 }
 
 function laserAttackP2() {
+
     let laserSound = new Audio('Son/SFX_laserTest.mp3');
     laserSound.volume = 0.2;
-
     perso2.src = "Images/Attackperso2_0.png";
+
     setTimeout(() => {
         perso2.src = "Images/Attackperso2_1.png";
     }, 400);
@@ -1335,6 +1366,7 @@ function laserAttackP2() {
             }
         }, time)
     }
+
     for (let time = 1900; time < 2800; time += 15) {
         setTimeout(() => {
             laserP2.style.height = height + "%";
@@ -1352,6 +1384,7 @@ function laserAttackP2() {
             }
         }, time)
     }
+
     setTimeout(() => {
         laserP2.style.display = "none";
         perso2.src = "Images/Attackperso2_0.png";
@@ -1368,14 +1401,15 @@ function laserAttackP2() {
 }
 
 function laserfinishP1() {
+
     let container = document.getElementById('container');
     let body = document.getElementById('body');
     let whiteScreen = document.getElementById('altback');
     let vsimg = document.getElementById('vs-img');
     let koimg = document.getElementById('ko-img');
     let anim = document.getElementById('animation-container');
-    anim.style.display = "none";
     whiteScreen.style.display = "block";
+    anim.style.display = "none";
     let laserSound = new Audio('Son/SFX_laser.mp3');
     laserSound.volume = 0.2;
 
@@ -1386,10 +1420,12 @@ function laserfinishP1() {
     let koHeight = 112;
     let koWidth = 148;
     let koOpacity = 1;
+
     setTimeout(() => {
         vsimg.style.display = "none";
         koimg.style.display = "block";
     }, 1500);
+
     for (let time = 1500; time <= 2500; time += 15) {
         setTimeout(() => {
             koimg.style.top = koTop + "%";
@@ -1402,6 +1438,7 @@ function laserfinishP1() {
             koWidth += 2.24;
         }, time);
     }
+
     setTimeout(() => {
         koimg.src = "Images/VS_KOframe4.png";
     }, 2400);
@@ -1524,14 +1561,15 @@ function laserfinishP1() {
 }
 
 function laserfinishP2() {
+
     let container = document.getElementById('container');
     let body = document.getElementById('body');
     let whiteScreen = document.getElementById('altback');
     let vsimg = document.getElementById('vs-img');
     let koimg = document.getElementById('ko-img');
     let anim = document.getElementById('animation-container');
-    anim.style.display = "none";
     whiteScreen.style.display = "block";
+    anim.style.display = "none";
     let laserSound = new Audio('Son/SFX_laser.mp3');
     laserSound.volume = 0.2;
 
@@ -1542,6 +1580,7 @@ function laserfinishP2() {
     let koHeight = 112;
     let koWidth = 148;
     let koOpacity = 1;
+
     setTimeout(() => {
         vsimg.style.display = "none";
         koimg.style.display = "block";
@@ -1559,6 +1598,7 @@ function laserfinishP2() {
             koWidth += 2.24;
         }, time);
     }
+    
     setTimeout(() => {
         koimg.src = "Images/VS_KOframe4.png";
     }, 2400);
