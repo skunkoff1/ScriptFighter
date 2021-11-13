@@ -540,6 +540,7 @@ function checkLetter(letter, player) {
         }, 1650);
     }
     if (fireP1 == 3 && player == 1) {
+        good.className = "onFire";
         good.innerHTML = nameP1 + " is on fire";
         animSSJP1();
     }
@@ -550,6 +551,7 @@ function checkLetter(letter, player) {
         }, 1650);
     }
     if (fireP2 == 3 && player == 2) {
+        good.className = "onFire";
         good.innerHTML = nameP2 + " is on fire";
         animSSJP2();
     }
@@ -790,6 +792,7 @@ function nextTurn() {
     // Reset des autres animations de jeu
     message.className = "";
     message.style.display = "none";
+    good.className = "";
     good.style.display = "none";
     absentLetter.style.display = "none";
     callLetter.style.display = "none";

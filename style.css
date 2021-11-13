@@ -423,6 +423,22 @@ button {
     }
 }
 
+.onFire {
+    font-size:90px;
+    animation-name: good;
+    animation-duration: 0.2s;
+    animation-iteration-count: 5; 
+}
+
+@keyframes onFire {
+    0%{        
+        color: rgb(250, 2, 2);
+    } 
+    100%{        
+        color: rgb(251, 255, 0);
+    }
+}
+
 #fightmsg {
     position: absolute;    
     display: flex;
@@ -1001,7 +1017,7 @@ button {
 /*========================= MESSAGE EN JEU ======================*/
 
 #message {
-    position: relative;   
+    position: relative; 
     font-size: 0px;
     color: rgb(238, 12, 12);
     text-shadow: 2px 2px 2px rgb(0, 0, 0);  
