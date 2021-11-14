@@ -273,9 +273,9 @@ function launchGame() {
     arrayP1 = wordP1Upper.split('');
     arrayP2 = wordP2Upper.split('');
     createUnderscore(arrayP1, arrayP2);
-    
+
     // Affichage mot joueur 1
-    displayWord(1); 
+    displayWord(1);
 
     // Flag "en cours de jeu"
     inGame = true;
@@ -309,30 +309,33 @@ function launchGame() {
 function checkHours() {
 
     let body = document.getElementById('body');
-    let name = document.querySelector('.name');
+    let nameColorP1 = document.getElementById('nameP1');
+    let nameColorP2 = document.getElementById('nameP2');
     let slotNameP1 = document.getElementById('nameP1');
 
     date = new Date();
-    
+
     // Fonction changeant de stage toutes les minutes
     minute = date.getMinutes();
     if (minute % 2 == 0) {
         music = new Audio('Son/script_Fighter.mp3');
-        body.style.backgroundImage = "url('Images/backgroundSandy.gif')"; 
+        body.style.backgroundImage = "url('Images/backgroundSandy.gif')";
         stage = 1;
-        name.style.color = "white";
+        nameColorP1.style.color = "white";
+        nameColorP2.style.color = "white";
         slotNameP1.className = "lightname";
         blink.style.color = "white";
-        lightning = "blink1"; 
+        lightning = "blink1";
     }
     else {
         music = new Audio('Son/Stage_2.mp3');
         body.style.backgroundImage = "url('Images/STAGE2.gif')";
         stage = 2;
-        name.style.color = "rgb(96, 173, 148)";
+        nameColorP1.style.color = "rgb(217, 255, 0)";
+        nameColorP2.style.color = "rgb(96, 173, 148)";
         slotNameP1.className = "lightname2";
-        blink.style.color = "rgb(217, 255, 0)";  
-        lightning = "blink2";  
+        blink.style.color = "rgb(217, 255, 0)";
+        lightning = "blink2";
     }
     /*
     // Fonction changeant de stage en fonction de l'heure de la journée
@@ -342,7 +345,8 @@ function checkHours() {
         music = new Audio('Son/script_Fighter.mp3');
         body.style.backgroundImage = "url('Images/backgroundSandy.png')";
         stage = 1;
-        name.style.color = "white";
+        nameColorP1.style.color = "white";
+        nameColorP2.style.color = "white";
         slotNameP1.className = "lightname";
         blink.style.color = "white";
         lightning = "blink1";
@@ -351,7 +355,8 @@ function checkHours() {
         music = new Audio('Son/Stage_2.mp3');
         body.style.backgroundImage = "url('Images/STAGE2.gif')";
         stage = 2;
-        name.style.color = "rgb(96, 173, 148)";
+        nameColorP1.style.color = "rgb(96, 173, 148)";
+        nameColorP2.style.color = "rgb(96, 173, 148)";
         slotNameP1.className = "lightname2";
         blink.style.color = "rgb(217, 255, 0)";
         lightning = "blink2";
@@ -387,7 +392,7 @@ function play() {
     fightdiv.className = "";
     fightimg.style.display = "none";
     fightimg.className = "";
-    anim.className = "";    
+    anim.className = "";
 
     // Récupération du guess joueur et mise en majuscule    
     let answer = replace(playerAnswer.value);
@@ -403,7 +408,7 @@ function play() {
         checkLetter(answer, player);
     }
     else {
-        checkWord(answer, player);        
+        checkWord(answer, player);
     }
 }
 
@@ -455,7 +460,7 @@ function checkLetter(letter, player) {
                 attack = 1;
                 playerDamage(player);
 
-            // Si lettre présente dans le mot    
+                // Si lettre présente dans le mot    
             } else {
 
                 // Mise a jour de l'underscore pour l'afffichage en jeu et la vérification
@@ -489,7 +494,7 @@ function checkLetter(letter, player) {
             playerDamage(player);
         }
 
-    // GESTION JOUEUR 2
+        // GESTION JOUEUR 2
     } else if (player == 2) {
         // Si la lettre n'a pas encore été tentée
         if (triesP2.indexOf(letter) === -1) {
@@ -511,7 +516,7 @@ function checkLetter(letter, player) {
                 fireP2 = 0;
                 attack = 1;
 
-            // Si lettre présente dans le mot    
+                // Si lettre présente dans le mot    
             } else {
 
                 // Mise a jour de l'underscore pour l'affichage en jeu
@@ -519,7 +524,7 @@ function checkLetter(letter, player) {
 
                 // Si mot complet
                 if (verify === wordP1Upper) {
-                    ending = true;absentLetter
+                    ending = true; absentLetter
                     setTimeout(() => {
                         finishHim(2);
                     }, 1500);
@@ -596,7 +601,7 @@ function checkWord(word, player) {
             fireP1 = 0;
             launchNextTurn();
         }
-    // Gestion joueur 2
+        // Gestion joueur 2
     } else if (player == 2) {
         if (word == wordP1Upper) {
             p1w.innerHTML = wordP1Upper;
@@ -739,6 +744,11 @@ function nextTurn() {
     let pTurnName = document.getElementById('pTurnName');
     let guessButton = document.getElementById('answerSubmit');
     let anim = document.getElementById('animation-container');
+    // Permutation nom joueur
+    let slotNameP1 = document.getElementById('nameP1');
+    let slotNameP2 = document.getElementById('nameP2');
+    let nameColorP1 = document.getElementById('nameP1');
+    let nameColorP2 = document.getElementById('nameP2');
 
     if (player == 1) {
 
@@ -757,18 +767,15 @@ function nextTurn() {
             displayWord(2);
         }
 
-        // Permutation nom joueur
-        let slotNameP1 = document.getElementById('nameP1');
-        let slotNameP2 = document.getElementById('nameP2');
-
         slotNameP1.className = "";
-        if(stage == 1) {
+        if (stage == 1) {
             slotNameP2.className = "lightname";
         }
         else {
-            slotNameP2.className = "lightname2"; 
+            slotNameP2.className = "lightname2";
+            nameColorP2.style.color = "rgb(217, 255, 0)"
         }
-        
+
         pTurnName.innerHTML = nameP2;
 
     } else if (player == 2) {
@@ -788,16 +795,13 @@ function nextTurn() {
             displayWord(1);
         }
 
-        // Permutation nom joueur
-        let slotNameP1 = document.getElementById('nameP1');
-        let slotNameP2 = document.getElementById('nameP2');
-
         slotNameP2.className = "";
-        if(stage == 1) {
+        if (stage == 1) {
             slotNameP1.className = "lightname";
         }
         else {
-            slotNameP1.className = "lightname2"; 
+            slotNameP1.className = "lightname2";
+            nameColorP1.style.color = "rgb(217, 255, 0)";
         }
         pTurnName.innerHTML = nameP1;
     }
@@ -806,7 +810,7 @@ function nextTurn() {
     getTurnMessage();
 
     // Appel de l'animation de changement de tour
-    turnPlayer.style.display = "block";    
+    turnPlayer.style.display = "block";
     anim.className = "anim";
 
     // Reset des autres animations de jeu
@@ -841,7 +845,7 @@ function nextTurn() {
 
 // Fonction qui lance le finish
 function finishHim(player) {
-    
+
     let finish = document.getElementById('finishDiv');
     finish.style.display = "block";
     setTimeout(() => {
@@ -948,7 +952,7 @@ function restart() {
 
     let anim = document.getElementById('animation-container');
     anim.style.display = "block";
-    
+
     message.className = "";
     message.style.display = "none";
     callLetter.style.display = "none";
@@ -1207,7 +1211,7 @@ function animSSJP2() {
 
     setTimeout(() => {
         perso2.src = "Images/Attackperso2_1.png";
-    }, 1500);    
+    }, 1500);
 
     setTimeout(() => {
         perso2.src = "Images/Spriteperso2.gif";
@@ -1342,7 +1346,7 @@ function laserAttackP1() {
     }, 3100);
     setTimeout(() => {
         perso2.className = "laserDamageP2";
-    }, 1120);    
+    }, 1120);
 }
 
 function laserAttackP2() {
@@ -1354,7 +1358,7 @@ function laserAttackP2() {
     setTimeout(() => {
         perso2.src = "Images/Attackperso2_1.png";
     }, 400);
-    
+
     setTimeout(() => {
         perso2.src = "Images/Attackperso2_3.png";
         laserP2.style.display = "block";
@@ -1404,7 +1408,7 @@ function laserAttackP2() {
     }
 
     setTimeout(() => {
-        laserP2.style.display = "none";        
+        laserP2.style.display = "none";
     }, 2800);
     setTimeout(() => {
         perso2.src = "Images/Spriteperso2.gif";
@@ -1412,7 +1416,7 @@ function laserAttackP2() {
     setTimeout(() => {
         perso1.className = "laserDamageP1";
         perso1.className = "";
-    }, 1120);    
+    }, 1120);
 }
 
 function laserfinishP1() {
@@ -1613,7 +1617,7 @@ function laserfinishP2() {
             koWidth += 2.24;
         }, time);
     }
-    
+
     setTimeout(() => {
         koimg.src = "Images/VS_KOframe4.png";
     }, 2400);
@@ -1638,7 +1642,7 @@ function laserfinishP2() {
     }, 4000);
 
     // ANIMATION LASER ET WHITESCREEN
-    perso2.src = "Images/Attackperso2_1.png";    
+    perso2.src = "Images/Attackperso2_1.png";
     setTimeout(() => {
         perso2.src = "Images/Attackperso2_2.png";
     }, 550);
@@ -1654,7 +1658,7 @@ function laserfinishP2() {
     let width = 3;
     let blinky = 1;
     let margin = 3;
-    let right = 23;
+    let right = 25;
     let opacity = 0;
 
     for (let time = 700; time < 1270; time += 15) {

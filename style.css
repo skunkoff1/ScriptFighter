@@ -245,13 +245,13 @@ button {
 
 .name {
     margin-top: 8vh;
-    color:white;
 }
 
 #nameP1 {
     text-transform: uppercase;    
     font-size: 28px;
     margin: 15px 5px 0 5px;
+    color:white;
 }
 
 #nameP2 {
@@ -259,6 +259,7 @@ button {
     font-size: 28px;
     text-align: end;
     margin: 15px 20px 0px 5px;
+    color:white;
 }
 
 #imageP1, #imageP2 {
@@ -404,7 +405,7 @@ button {
     background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(228,238,65,1) 40%, rgba(182,219,0,1) 50%, rgba(228,238,65,1) 60%, rgba(255,255,255,1) 100%); 
     width:2%;
     margin-top: 3%;
-    right: 23%;
+    right: 25%;
     display: none;
     z-index:7;
     border-radius: 40%;
@@ -745,11 +746,11 @@ button {
         opacity:1;
     }
     58% {
-        right:75%;
+        right:72%;
         opacity:1;
     }
     70% {
-        right:75%;
+        right:72%;
     }
     75% {
         right:60%;
@@ -815,11 +816,11 @@ button {
         opacity:1;
     }
     58% {
-        left:75%;
+        left:72%;
         opacity:1;
     }
     70% {
-        left:75%;
+        left:72%;
     }
     75% {
         left:60%;
