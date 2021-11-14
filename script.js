@@ -309,7 +309,7 @@ function launchGame() {
 function checkHours() {
 
     let body = document.getElementById('body');
-    let name = document.getElementById('name');
+    let name = document.querySelector('.name');
     let slotNameP1 = document.getElementById('nameP1');
 
     date = new Date();
@@ -318,7 +318,7 @@ function checkHours() {
     minute = date.getMinutes();
     if (minute % 2 == 0) {
         music = new Audio('Son/script_Fighter.mp3');
-        body.style.backgroundImage = "url('Images/backgroundSandy.png')"; 
+        body.style.backgroundImage = "url('Images/backgroundSandy.gif')"; 
         stage = 1;
         name.style.color = "white";
         slotNameP1.className = "lightname";
@@ -1207,11 +1207,7 @@ function animSSJP2() {
 
     setTimeout(() => {
         perso2.src = "Images/Attackperso2_1.png";
-    }, 1500);
-
-    setTimeout(() => {
-        perso2.src = "Images/Attackperso2_2.png";
-    }, 1900);
+    }, 1500);    
 
     setTimeout(() => {
         perso2.src = "Images/Spriteperso2.gif";
@@ -1342,13 +1338,11 @@ function laserAttackP1() {
     }, 2800);
     setTimeout(() => {
         perso1.src = "Images/Spriteperso1.gif";
+        perso2.className = "";
     }, 3100);
     setTimeout(() => {
         perso2.className = "laserDamageP2";
-    }, 1120);
-    setTimeout(() => {
-        perso2.className = "";
-    }, 3100);
+    }, 1120);    
 }
 
 function laserAttackP2() {
@@ -1360,9 +1354,7 @@ function laserAttackP2() {
     setTimeout(() => {
         perso2.src = "Images/Attackperso2_1.png";
     }, 400);
-    setTimeout(() => {
-        perso2.src = "Images/Attackperso2_2.png";
-    }, 550);
+    
     setTimeout(() => {
         perso2.src = "Images/Attackperso2_3.png";
         laserP2.style.display = "block";
@@ -1412,18 +1404,15 @@ function laserAttackP2() {
     }
 
     setTimeout(() => {
-        laserP2.style.display = "none";
-        perso2.src = "Images/Attackperso2_0.png";
+        laserP2.style.display = "none";        
     }, 2800);
     setTimeout(() => {
         perso2.src = "Images/Spriteperso2.gif";
     }, 3100);
     setTimeout(() => {
         perso1.className = "laserDamageP1";
-    }, 1120);
-    setTimeout(() => {
         perso1.className = "";
-    }, 3100);
+    }, 1120);    
 }
 
 function laserfinishP1() {
@@ -1649,10 +1638,7 @@ function laserfinishP2() {
     }, 4000);
 
     // ANIMATION LASER ET WHITESCREEN
-    perso2.src = "Images/Attackperso2_0.png";
-    setTimeout(() => {
-        perso2.src = "Images/Attackperso2_1.png";
-    }, 400);
+    perso2.src = "Images/Attackperso2_1.png";    
     setTimeout(() => {
         perso2.src = "Images/Attackperso2_2.png";
     }, 550);

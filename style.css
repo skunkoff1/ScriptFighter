@@ -19,6 +19,10 @@ body {
     display:block;       
 }
 
+fieldset {
+    background-color:rgb(10, 28, 110);
+}
+
 #musicButtonDiv {
     position:absolute;
     display:flex;
@@ -46,7 +50,7 @@ body {
 .menuStyle {    
     color:rgb(235, 98, 35);
     text-shadow: 1px 1px 1px rgb(0, 0, 0);
-    background-image: url('Images/backgroundSandyMenu.png');  
+    background-image: url('Images/backgroundmenu.png');  
     background-color: black;
     z-index: 0;
 }
@@ -239,7 +243,7 @@ button {
     z-index: 1;
 }
 
-#name {
+.name {
     margin-top: 8vh;
     color:white;
 }
