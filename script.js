@@ -113,7 +113,7 @@ function pressStart() {
 
 // Vérification du mot dans l'API
 async function validateAPI(word) {
-    const res = await fetch("http://cemotexistetil.lyliya.fr:8888/exist?word=" + word); //Notre api=> http://localhost:3000/exist?word=   http://cemotexistetil.lyliya.fr:8888/exist?word=
+    const res = await fetch("https://cemotexistetil.lyliya.fr/exist?word=" + word); //Notre api=> http://localhost:3000/exist?word=   https://cemotexistetil.lyliya.fr/exist?word=
     //const res = await fetch("http://localhost:3000/exist?word=" + word); 
     const forms = await res.json();
     return forms.exist;
