@@ -764,7 +764,7 @@ function nextTurn() {
             displayWord(2);
         }
 
-        slotNameP1.className = "";
+        nameColorP1.className = "";
         if (stage == 1) {
             nameColorP2.className = "lightname";
         }
@@ -793,7 +793,7 @@ function nextTurn() {
             displayWord(1);
         }
 
-        slotNameP2.className = "";
+        nameColorP2.className = "";
         if (stage == 1) {
             nameColorP1.className = "lightname";
         }

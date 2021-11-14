@@ -13,8 +13,8 @@ Credits : Original graphism and music  by : Sandy WEBERT
 /____  >\___  >__|  |__|   __/|__|    |__|  |__\___  /|___|  /__|  \___  >__|   
      \/     \/         |__|                   /_____/      \/          \/       
 
-Online Game at these adresses : https://www.damien-didrich.com/Script-Fighter-OR/index.html	
-and : https://jesuswastaken.github.io/ScriptFighter  
+Online Game at these adresses : https://www.scriptfighter.fr	
+
 
 This game can be played online (recommended) or locally.
 
