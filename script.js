@@ -743,9 +743,7 @@ function nextTurn() {
     let pTurnName = document.getElementById('pTurnName');
     let guessButton = document.getElementById('answerSubmit');
     let anim = document.getElementById('animation-container');
-    // Permutation nom joueur
-    let slotNameP1 = document.getElementById('nameP1');
-    let slotNameP2 = document.getElementById('nameP2');
+    // Permutation nom joueur    
     let nameColorP1 = document.getElementById('nameP1');
     let nameColorP2 = document.getElementById('nameP2');
 
@@ -768,10 +766,10 @@ function nextTurn() {
 
         slotNameP1.className = "";
         if (stage == 1) {
-            slotNameP2.className = "lightname";
+            nameColorP2.className = "lightname";
         }
         else {
-            slotNameP2.className = "lightname2";
+            nameColorP2.className = "lightname2";
             nameColorP2.style.color = "rgb(217, 255, 0)";            
             nameColorP1.style.color = "rgb(96, 173, 148)";
         }
@@ -797,10 +795,10 @@ function nextTurn() {
 
         slotNameP2.className = "";
         if (stage == 1) {
-            slotNameP1.className = "lightname";
+            nameColorP1.className = "lightname";
         }
         else {
-            slotNameP1.className = "lightname2";
+            nameColorP1.className = "lightname2";
             nameColorP1.style.color = "rgb(217, 255, 0)";
             nameColorP2.style.color = "rgb(96, 173, 148)";
         }
