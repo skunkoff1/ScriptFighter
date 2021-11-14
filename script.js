@@ -311,7 +311,6 @@ function checkHours() {
     let body = document.getElementById('body');
     let nameColorP1 = document.getElementById('nameP1');
     let nameColorP2 = document.getElementById('nameP2');
-    let slotNameP1 = document.getElementById('nameP1');
 
     date = new Date();
 
@@ -323,7 +322,7 @@ function checkHours() {
         stage = 1;
         nameColorP1.style.color = "white";
         nameColorP2.style.color = "white";
-        slotNameP1.className = "lightname";
+        nameColorP1.className = "lightname";
         blink.style.color = "white";
         lightning = "blink1";
     }
@@ -333,7 +332,7 @@ function checkHours() {
         stage = 2;
         nameColorP1.style.color = "rgb(217, 255, 0)";
         nameColorP2.style.color = "rgb(96, 173, 148)";
-        slotNameP1.className = "lightname2";
+        nameColorP1.className = "lightname2";
         blink.style.color = "rgb(217, 255, 0)";
         lightning = "blink2";
     }
@@ -347,7 +346,7 @@ function checkHours() {
         stage = 1;
         nameColorP1.style.color = "white";
         nameColorP2.style.color = "white";
-        slotNameP1.className = "lightname";
+        nameColorP1.className = "lightname";
         blink.style.color = "white";
         lightning = "blink1";
     }
@@ -357,7 +356,7 @@ function checkHours() {
         stage = 2;
         nameColorP1.style.color = "rgb(96, 173, 148)";
         nameColorP2.style.color = "rgb(96, 173, 148)";
-        slotNameP1.className = "lightname2";
+        nameColorP1.className = "lightname2";
         blink.style.color = "rgb(217, 255, 0)";
         lightning = "blink2";
     }*/
@@ -907,7 +906,7 @@ function restart() {
     let body = document.getElementById('body');
     let menu = document.getElementById('menu');
     let endingScreen = document.getElementById('endingScreen');
-    body.style.backgroundImage = "url('Images/backgroundSandyMenu.png')";
+    body.style.backgroundImage = "url('Images/bbackgroundSandyMenu.png')";
     body.className = "menuStyle";
     menu.style.display = "block";
     endingScreen.style.display = "none";
