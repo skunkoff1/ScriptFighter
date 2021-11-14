@@ -772,7 +772,8 @@ function nextTurn() {
         }
         else {
             slotNameP2.className = "lightname2";
-            nameColorP2.style.color = "rgb(217, 255, 0)"
+            nameColorP2.style.color = "rgb(217, 255, 0)";            
+            nameColorP1.style.color = "rgb(96, 173, 148)";
         }
 
         pTurnName.innerHTML = nameP2;
@@ -801,6 +802,7 @@ function nextTurn() {
         else {
             slotNameP1.className = "lightname2";
             nameColorP1.style.color = "rgb(217, 255, 0)";
+            nameColorP2.style.color = "rgb(96, 173, 148)";
         }
         pTurnName.innerHTML = nameP1;
     }
