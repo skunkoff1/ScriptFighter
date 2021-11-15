@@ -13,17 +13,11 @@ Credits : Original graphism and music  by : Sandy WEBERT
 /____  >\___  >__|  |__|   __/|__|    |__|  |__\___  /|___|  /__|  \___  >__|   
      \/     \/         |__|                   /_____/      \/          \/       
 
-Online Game at these adresses : https://www.scriptfighter.fr	
-
+Webpage will be deployed soon	  
 
 This game can be played online (recommended) or locally.
 
-1.HOW TO PLAY WITH AN INTERNET CONNECTION
-
-Just launch the game by double-clicking index.html 
-Or drag and drop index.html in your favorite browser
-
-2. HOW TO PLAY WITHOUT AN INTERNET CONNECTION (ADVANCED INFORMATIC OR RECKLESS USER !)
+1. HOW TO PLAY WITHOUT AN INTERNET CONNECTION (ADVANCED INFORMATIC OR RECKLESS USER !)
 
 This game uses an online API that checks a 411000 French words list and an upcoming English list, 
 it's easier to play online.

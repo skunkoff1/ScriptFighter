@@ -163,6 +163,10 @@ button {
     font-size:35px;
 }
 
+#replay {
+    color: rgb(235 98 35);
+}
+
 #gameLaunch:hover, #answerSubmit:hover, #replay:hover {
     background-color:rgba(160, 132, 132, 0.295);
     color:aliceblue;
@@ -1088,7 +1092,7 @@ button {
     align-items:center;
     justify-content:space-around;
     display:none;
-    color:black;
+    color: rgb(235 98 35);
 }
 
 #endingScreen h2 {

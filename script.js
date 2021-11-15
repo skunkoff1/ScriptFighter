@@ -133,7 +133,7 @@ async function checkStart() {
     let p1checked = document.getElementById('p1checked');
     let p2checked = document.getElementById('p2checked');
 
-    // Reset des messages d'erreur de vÃ©rification des mots joueurs   
+    // Reset des messages d'erreur de vérification des mots joueurs   
     err1.style.display = "none";
     err2.style.display = "none";
     err3.style.display = "none";
@@ -141,67 +141,66 @@ async function checkStart() {
     // Reset des bordures d'erreurs des inputs
     document.getElementById('player1word').className = "";
     document.getElementById('player2word').className = "";
+    
+        if ((p1checked.checked) && (p2checked.checked)) {
 
-    if ((p1checked.checked) && (p2checked.checked)) {
+            // Mise en majuscules des mots joueurs
+            wordP1Upper = replace(wordP1.value);
+            wordP2Upper = replace(wordP2.value);
 
-        // Mise en majuscules des mots joueurs
-        wordP1Upper = replace(wordP1.value);
-        wordP2Upper = replace(wordP2.value);
+            // Appel de l'API qui vérifie si le mot joueur existe
+            const validateP1 = await validateAPI(wordP1Upper);
+            const validateP2 = await validateAPI(wordP2Upper);
 
-        // Appel de l'API qui vÃ©rifie si le mot joueur existe
-        const validateP1 = await validateAPI(wordP1Upper);
-        const validateP2 = await validateAPI(wordP2Upper);
+            // si les mots ne sont pas valides
+            if (validateP1 == false && validateP2 == false) {
+                // Remise a zéro input choix mot joueur
+                wordP1.value = "";
+                wordP2.value = "";
 
-        // si les mots ne sont pas valides
-        if (validateP1 == false && validateP2 == false) {
-            // Remise a zÃ©ro input choix mot joueur
-            wordP1.value = "";
-            wordP2.value = "";
+                // Appel de la bordure d'erreur input
+                wordP1.className = "formError";
+                wordP2.className = "formError";
 
-            // Appel de la bordure d'erreur input
-            wordP1.className = "formError";
-            wordP2.className = "formError";
+                // On décoche les checkbox "ready"
+                document.getElementById('p1checked').checked = false;
+                document.getElementById('p2checked').checked = false;
 
-            // On dÃ©coche les checkbox "ready"
-            document.getElementById('p1checked').checked = false;
-            document.getElementById('p2checked').checked = false;
+                // Affichage message d'erreur
+                err3.style.display = "block";
+            }
+            else if (validateP1 == false) {
+                // Remise a zéro input choix mot joueur
+                wordP1.value = "";
 
-            // Affichage message d'erreur
-            err3.style.display = "block";
+                // Appel de la bordure d'erreur input
+                wordP1.className = "formError";
+
+                // On décoche la checkbox "ready"
+                document.getElementById('p1checked').checked = false;
+
+                // Affichage message d'erreur
+                err1.style.display = "block";
+            }
+            else if (validateP2 == false) {
+                // Remise a zéro input choix mot joueur
+                wordP2.value = "";
+
+                // Appel de la bordure d'erreur input
+                wordP2.className = "formError";
+
+                // On décoche la checkbox "ready"
+                document.getElementById('p2checked').checked = false;
+
+                // Affichage message d'erreur
+                err2.style.display = "block";
+            }
+            // si tout ok, lancement du jeu
+            else {
+                launchGame();
+            }
         }
-        else if (validateP1 == false) {
-            // Remise a zÃ©ro input choix mot joueur
-            wordP1.value = "";
-
-            // Appel de la bordure d'erreur input
-            wordP1.className = "formError";
-
-            // On dÃ©coche la checkbox "ready"
-            document.getElementById('p1checked').checked = false;
-
-            // Affichage message d'erreur
-            err1.style.display = "block";
-        }
-        else if (validateP2 == false) {
-            // Remise a zÃ©ro input choix mot joueur
-            wordP2.value = "";
-
-            // Appel de la bordure d'erreur input
-            wordP2.className = "formError";
-
-            // On dÃ©coche la checkbox "ready"
-            document.getElementById('p2checked').checked = false;
-
-            // Affichage message d'erreur
-            err2.style.display = "block";
-        }
-        // si tout ok, lancement du jeu
-        else {
-            launchGame();
-        }
-    }
 }
-
 /*=============================== FONCTION FORMATAGE DES MOTS ======================*/
 
 function replace(word) {
@@ -866,7 +865,8 @@ function finishHim(player) {
 
 //fonction de passage de l'Ã©cran jeu Ã  l'Ã©cran de fin
 function victory(player) {
-
+	
+    let wordsUsed = "<br/>Le mot de " + nameP1 + " etait : " + wordP1Upper + "<br/>Le mot de " + nameP2 + " etait : " + wordP2Upper;
     let endingString;
     let winnerName;
     let endingTitle = document.getElementById('endingTitle');
@@ -876,16 +876,16 @@ function victory(player) {
     inGame = false;
     if (player == 1) {
         if (p2Hp > 0) {
-            endingString = nameP1 + " a devine le mot de " + nameP2 + " !";
+            endingString = nameP1 + " a devine le mot de " + nameP2 + " !"+wordsUsed;
         } else {
-            endingString = nameP2 + " a succombe a ses blessures, <br>" + nameP1 + " gagne !";
+            endingString = nameP2 + " a succombe a ses blessures, <br>" + nameP1 + " gagne !"+wordsUsed;
         }
         winnerName = nameP1;
     } else if (player == 2) {
         if (p1Hp > 0) {
-            endingString = nameP2 + " a devine le mot de " + nameP1 + " !";
+            endingString = nameP2 + " a devine le mot de " + nameP1 + " !"+wordsUsed;
         } else {
-            endingString = nameP1 + " a succombe a ses blessures, <br>" + nameP2 + " gagne !";
+            endingString = nameP1 + " a succombe a ses blessures, <br>" + nameP2 + " gagne !"+wordsUsed;
         }
         winnerName = nameP2;
     } else {
@@ -1536,7 +1536,7 @@ function laserfinishP1() {
     }
 
     setTimeout(() => {
-        body.style.backgroundImage = "url('Images/altback.jpg')";
+ //       body.style.backgroundImage = "url('Images/altback.png')";
     }, 3000);
 
     for (let time = 4000; time < 4900; time += 15) {
@@ -1693,7 +1693,7 @@ function laserfinishP2() {
     }
 
     setTimeout(() => {
-        body.style.backgroundImage = "url('Images/altback.jpg')";
+//        body.style.backgroundImage = "url('Images/altback.png')";
     }, 3000);
 
     for (let time = 4000; time < 4900; time += 15) {
