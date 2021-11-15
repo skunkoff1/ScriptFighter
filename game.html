@@ -22,22 +22,22 @@
         </div>
         <form>
             <fieldset>
-                <legend>PLAYER 1</legend>
-                <label>Name : <input required="required" name="player1name" id="player1name" type="text"
-                        placeholder="Player1 name" autocomplete="off" /></label>
-                <label>Word to guess : <input required="required" name="player1word" id="player1word" type="password"
+                <legend>JOUEUR 1</legend>
+                <label>Nom : <input required="required" name="player1name" id="player1name" type="text"
+                        placeholder="Jean-Eudes" autocomplete="off" /></label>
+                <label>Mot a deviner : <input required="required" name="player1word" id="player1word" type="password"
                         autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" /></label>
                 <input type="checkbox" value="P1ready" id="p1checked" />
-                <label for="p1checked">Player 1 Ready</label>
+                <label for="p1checked">Joueur 1 pret</label>
             </fieldset>
             <fieldset>
-                <legend>PLAYER 2</legend>
-                <label>Name : <input required="required" name="player2name" id="player2name" type="text"
-                        placeholder="Player2 name" autocomplete="off" /></label>
-                <label>Word to guess : <input required="required" name="player2word" id="player2word" type="password"
+                <legend>JOUEUR 2</legend>
+                <label>Nom : <input required="required" name="player2name" id="player2name" type="text"
+                        placeholder="Maurice" autocomplete="off" /></label>
+                <label>Mot a deviner : <input required="required" name="player2word" id="player2word" type="password"
                         autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" /></label>
                 <input type="checkbox" value="P2ready" id="p2checked" />
-                <label for="p2checked">Player 2 Ready</label>
+                <label for="p2checked">Joueur 2 pret</label>
             </fieldset>
             <div id="startBtn">
                 <p id="errAPI1" class="errAPI">Mot joueur 1 non valide !</p>
@@ -100,7 +100,7 @@
             <div id="answerForm">
                 <input required="required" minlength="1" type="text" name="playerAnswer" id="playerAnswer" class=""
                     autofocus="on" autocomplete="off" />
-                <button type='button' id="answerSubmit" onclick="play()">GUESS</button>
+                <button type='button' id="answerSubmit" onclick="play()">VALIDER</button>
             </div>
         </div>
 
