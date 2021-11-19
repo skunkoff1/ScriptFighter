@@ -568,6 +568,7 @@ function checkLetter(letter, player) {
         good.className = "onFire";
         good.innerHTML = nameP1 + " is on fire";
         animSSJP1();
+        fireP1++;
     }
 
     if (fireP2 < 3) {
@@ -579,6 +580,7 @@ function checkLetter(letter, player) {
         good.className = "onFire";
         good.innerHTML = nameP2 + " is on fire";
         animSSJP2();
+        fireP2++;
     }
 
     if (ending == false) {
@@ -1419,10 +1421,10 @@ function laserAttackP2() {
     }, 2800);
     setTimeout(() => {
         perso2.src = "Images/Spriteperso2.gif";
+        perso1.className = "";
     }, 3100);
     setTimeout(() => {
-        perso1.className = "laserDamageP1";
-        perso1.className = "";
+        perso1.className = "laserDamageP1";        
     }, 1120);
 }
 
